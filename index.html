@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vogelfutter Vergleich</title>
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 2rem;
+      background: #f5f5f5;
+    }
+    h1 { margin-bottom: 0.25rem; }
+    p.quelle { color: #666; font-size: 0.9rem; margin-bottom: 1.5rem; }
+    #tabelle_wrapper {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+
+    /* Column headers */
+    table.dataTable thead th {
+      background: #2c3e50;
+      color: white;
+      white-space: nowrap;
+      position: relative;
+      padding-right: 28px !important;
+    }
+    table.dataTable thead th .th-inner {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      justify-content: space-between;
+    }
+
+    /* Filter button in header */
+    .filter-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 2px 4px;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      opacity: 0.6;
+      transition: opacity 0.15s, background 0.15s;
+    }
+    .filter-btn:hover { opacity: 1; background: rgba(255,255,255,0.15); }
+    .filter-btn.active { opacity: 1; }
+    .filter-btn.active svg path { fill: #f39c12; }
+    .filter-btn svg { width: 13px; height: 13px; }
+    .filter-btn svg path { fill: white; }
+
+    /* Dropdown popup */
+    .filter-popup {
+      display: none;
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      z-index: 1000;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      padding: 12px;
+      min-width: 180px;
+      color: #333;
+    }
+    .filter-popup.open { display: block; }
+    .filter-popup label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #666;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .filter-popup input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 5px 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .filter-popup input:focus { border-color: #2c3e50; }
+    .filter-popup .range-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .filter-popup .range-row input { width: 80px; }
+    .filter-popup .range-row span { color: #999; font-size: 0.85rem; }
+    .filter-popup .popup-footer {
+      margin-top: 8px;
+      text-align: right;
+    }
+    .filter-popup .btn-reset {
+      background: none;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      color: #666;
+    }
+    .filter-popup .btn-reset:hover { background: #f5f5f5; }
+
+    /* Table data */
+    tr.ausgeschieden td { text-decoration: line-through; color: #aaa; }
+    tr.ausgeschieden td.grund { text-decoration: none; color: #e74c3c; font-style: italic; }
+    td { white-space: nowrap; }
+    td.name { white-space: normal; min-width: 220px; }
+    td.num { text-align: right; }
+    td.mindest { text-align: center; }
+  </style>
+</head>
+<body>
+
+<h1>Vogelfutter Vergleich</h1>
+<p class="quelle">Quellen: Galaxus.ch — gespeicherte Produktseiten</p>
+
+<table id="tabelle" class="display" style="width:100%">
+  <thead>
+    <tr>
+      <th><div class="th-inner"><span>Produktname inkl. Marke</span><button class="filter-btn" data-col="0" data-type="text">ICON</button></div></th>
+      <th><div class="th-inner"><span>Menge (g)</span><button class="filter-btn" data-col="1" data-type="range">ICON</button></div></th>
+      <th><div class="th-inner"><span>Preis (CHF)</span><button class="filter-btn" data-col="2" data-type="range">ICON</button></div></th>
+      <th><div class="th-inner"><span>CHF/kg</span><button class="filter-btn" data-col="3" data-type="range">ICON</button></div></th>
+      <th><div class="th-inner"><span>Mindestmenge</span><button class="filter-btn" data-col="4" data-type="text">ICON</button></div></th>
+      <th><div class="th-inner"><span>Art</span><button class="filter-btn" data-col="5" data-type="text">ICON</button></div></th>
+      <th><div class="th-inner"><span>Ausscheidungsgrund</span><button class="filter-btn" data-col="6" data-type="text">ICON</button></div></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="name">CJ Wildbird Vogel-Streufutter Hoch-Energiemix</td><td class="num">2000</td><td class="num">22.50</td><td class="num">11.25</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">CJ Wildlife Gestreifte Sonnenblumenkerne</td><td class="num">2500</td><td class="num">35.00</td><td class="num">14.00</td><td class="mindest"></td><td>Sonnenblumenkerne</td><td></td></tr>
+    <tr><td class="name">CJ Wildlife Vogelfutter für Futtersäule</td><td class="num">1750</td><td class="num">11.70</td><td class="num">6.69</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">Donath Balkon Mix</td><td class="num">1020</td><td class="num">8.50</td><td class="num">8.33</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">Donath Balkon Mix</td><td class="num">5000</td><td class="num">30.70</td><td class="num">6.14</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">Donath Energie Mix</td><td class="num">1000</td><td class="num">8.50</td><td class="num">8.50</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">Donath Komplett Mix</td><td class="num">1000</td><td class="num">12.20</td><td class="num">12.20</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">Erdtmann Erdnussbruch</td><td class="num">1000</td><td class="num">10.10</td><td class="num">10.10</td><td class="mindest"></td><td>Erdnussbruch</td><td></td></tr>
+    <tr><td class="name">Erdtmann Meisenfutter</td><td class="num">1000</td><td class="num">11.50</td><td class="num">11.50</td><td class="mindest"></td><td>Meisenfutter</td><td></td></tr>
+    <tr><td class="name">Erdtmann Meisenfutter</td><td class="num">5000</td><td class="num">33.90</td><td class="num">6.78</td><td class="mindest"></td><td>Meisenfutter</td><td></td></tr>
+    <tr><td class="name">Erdtmann Streufutter</td><td class="num">2500</td><td class="num">6.70</td><td class="num">2.68</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">Erdtmann Vogelfutter/Streufutter 1000 g</td><td class="num">1000</td><td class="num">24.40</td><td class="num">24.40</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">GoWild Erdnusskernbruch</td><td class="num">2500</td><td class="num">19.90</td><td class="num">7.96</td><td class="mindest"></td><td>Erdnussbruch</td><td></td></tr>
+    <tr><td class="name">GoWild Streufutter mit Früchten</td><td class="num">2500</td><td class="num">18.70</td><td class="num">7.48</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">GoWild Streufutter mit Insekten</td><td class="num">2500</td><td class="num">17.90</td><td class="num">7.16</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">Lyra Pet Fettfutter</td><td class="num">10000</td><td class="num">40.80</td><td class="num">4.08</td><td class="mindest"></td><td>Fettfutter</td><td></td></tr>
+    <tr><td class="name">Lyra Pet Streufutter</td><td class="num">10000</td><td class="num">27.80</td><td class="num">2.78</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">MGA 30893</td><td class="num">1000</td><td class="num">5.50</td><td class="num">5.50</td><td class="mindest"></td><td>Wildvogelmischung</td><td></td></tr>
+    <tr><td class="name">Natura Punto Vogelfutter</td><td class="num">30</td><td class="num">12.95</td><td class="num">431.67</td><td class="mindest"></td><td>Vogelfutter-Snack</td><td></td></tr>
+    <tr class="ausgeschieden"><td class="name">Panto Fettfutter</td><td class="num">1000</td><td class="num">6.05</td><td class="num">6.05</td><td class="mindest">❗ 5</td><td>Fettfutter</td><td class="grund">Mindestbestellmenge</td></tr>
+    <tr><td class="name">Panto Sonnenblumenkerne gestreift</td><td class="num">1000</td><td class="num">6.50</td><td class="num">6.50</td><td class="mindest"></td><td>Sonnenblumenkerne</td><td></td></tr>
+    <tr><td class="name">Panto Streufutter</td><td class="num">1000</td><td class="num">7.50</td><td class="num">7.50</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">Panto Vierjahreszeiten Mix</td><td class="num">1000</td><td class="num">5.90</td><td class="num">5.90</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">Schweizer Classic 5</td><td class="num">5000</td><td class="num">17.70</td><td class="num">3.54</td><td class="mindest"></td><td>Wildvogelmischung</td><td></td></tr>
+    <tr><td class="name">Schweizer Eric</td><td class="num">5000</td><td class="num">29.90</td><td class="num">5.98</td><td class="mindest"></td><td>Wildvogelmischung</td><td></td></tr>
+    <tr><td class="name">Schweizer Eric Vogelfutter Mehlwürmer</td><td class="num">1800</td><td class="num">35.70</td><td class="num">19.83</td><td class="mindest"></td><td>Mehlwürmer</td><td></td></tr>
+    <tr><td class="name">Schweizer Eric Wildvogelmischung Delicatess</td><td class="num">5000</td><td class="num">69.65</td><td class="num">13.93</td><td class="mindest"></td><td>Wildvogelmischung</td><td></td></tr>
+    <tr><td class="name">Schweizer Eric Wildvogelmischung Delicatess</td><td class="num">600</td><td class="num">12.85</td><td class="num">21.42</td><td class="mindest"></td><td>Wildvogelmischung</td><td></td></tr>
+    <tr><td class="name">Schweizer Eric Wildvogelmischung Energy</td><td class="num">5000</td><td class="num">34.90</td><td class="num">6.98</td><td class="mindest"></td><td>Wildvogelmischung</td><td></td></tr>
+    <tr><td class="name">Schweizer Eric Wildvogelmischung Premium</td><td class="num">1000</td><td class="num">7.90</td><td class="num">7.90</td><td class="mindest"></td><td>Wildvogelmischung</td><td></td></tr>
+    <tr><td class="name">Schweizer Eric Wildvogelmischung Terrace</td><td class="num">5000</td><td class="num">23.70</td><td class="num">4.74</td><td class="mindest"></td><td>Wildvogelmischung</td><td></td></tr>
+    <tr><td class="name">Schweizer Vogelfutter Mehlwürmer</td><td class="num">250</td><td class="num">9.50</td><td class="num">38.00</td><td class="mindest"></td><td>Mehlwürmer</td><td></td></tr>
+    <tr><td class="name">Schweizer Wildtierfutter Summer</td><td class="num">2500</td><td class="num">15.70</td><td class="num">6.28</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">Schweizer Wildvogelmischung (Art.-Nr. 49606158)</td><td class="num">5000</td><td class="num">30.00</td><td class="num">6.00</td><td class="mindest"></td><td>Wildvogelmischung</td><td></td></tr>
+    <tr><td class="name">Schweizer Wildvogelmischung (Art.-Nr. 53626885)</td><td class="num">5000</td><td class="num">24.00</td><td class="num">4.80</td><td class="mindest"></td><td>Wildvogelmischung</td><td></td></tr>
+    <tr><td class="name">Schweizer Wildvogelmischung Classic</td><td class="num">1000</td><td class="num">5.70</td><td class="num">5.70</td><td class="mindest"></td><td>Wildvogelmischung</td><td></td></tr>
+    <tr><td class="name">Versele Laga Allround Mix</td><td class="num">15000</td><td class="num">30.90</td><td class="num">2.06</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">Versele Laga Clean Garden Blend</td><td class="num">2500</td><td class="num">11.70</td><td class="num">4.68</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">Versele Laga Frost Nights Blend</td><td class="num">2580</td><td class="num">23.90</td><td class="num">9.26</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">Versele Laga Gourmet Blend</td><td class="num">3000</td><td class="num">18.90</td><td class="num">6.30</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">Versele Laga Insect mix</td><td class="num">250</td><td class="num">15.90</td><td class="num">63.60</td><td class="mindest"></td><td>Insektenmix</td><td></td></tr>
+    <tr><td class="name">Versele Laga Menu Nature Jahreszeiten</td><td class="num">1000</td><td class="num">7.20</td><td class="num">7.20</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">Versele Laga Nesting Blend</td><td class="num">2500</td><td class="num">28.90</td><td class="num">11.56</td><td class="mindest"></td><td>Nistfutter</td><td></td></tr>
+    <tr><td class="name">Versele Laga Sunflower hearts</td><td class="num">750</td><td class="num">12.20</td><td class="num">16.27</td><td class="mindest"></td><td>Sonnenblumenkerne</td><td></td></tr>
+    <tr><td class="name">Versele Laga MN 4 Seasons Blend Promo</td><td class="num">4400</td><td class="num">13.90</td><td class="num">3.16</td><td class="mindest"></td><td>Streufutter</td><td></td></tr>
+    <tr><td class="name">Vitakraft VitaGarden Erdnüsse geschält</td><td class="num">500</td><td class="num">5.50</td><td class="num">11.00</td><td class="mindest"></td><td>Erdnüsse</td><td></td></tr>
+  </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+<script>
+  // SVG funnel icon
+  var funnelSVG = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 4a1 1 0 0 1 1-1h16a1 1 0 0 1 .76 1.65L14 12.59V20a1 1 0 0 1-1.45.89l-4-2A1 1 0 0 1 8 18v-5.41L3.24 5.65A1 1 0 0 1 3 5V4z"/></svg>';
+
+  // State: active filters per column
+  var filters = {};      // col -> { min, max } or { text }
+  var openPopup = null;  // currently open button element
+
+  // Range filter plugin
+  $.fn.dataTable.ext.search.push(function (settings, data) {
+    for (var col in filters) {
+      var f = filters[col];
+      if (f.type === 'range') {
+        var val = parseFloat(data[col]) || 0;
+        if (f.min !== '' && !isNaN(parseFloat(f.min)) && val < parseFloat(f.min)) return false;
+        if (f.max !== '' && !isNaN(parseFloat(f.max)) && val > parseFloat(f.max)) return false;
+      }
+    }
+    return true;
+  });
+
+  $(document).ready(function () {
+    var table = $('#tabelle').DataTable({
+      paging: false,
+      language: {
+        search: 'Suche:',
+        info: '_TOTAL_ Produkte',
+        infoEmpty: 'Keine Produkte',
+        zeroRecords: 'Keine Treffer'
+      },
+      columnDefs: [{ targets: [1, 2, 3], type: 'num' }]
+    });
+
+    // Replace ICON placeholder with SVG and attach popups
+    $('.filter-btn').each(function () {
+      var btn   = $(this);
+      var col   = parseInt(btn.data('col'));
+      var type  = btn.data('type');
+
+      btn.html(funnelSVG);
+
+      // Build popup
+      var popup;
+      if (type === 'range') {
+        popup = $('<div class="filter-popup">' +
+          '<label>Von</label>' +
+          '<div class="range-row">' +
+            '<input type="number" class="f-min" placeholder="Min" step="0.01">' +
+            '<span>–</span>' +
+            '<input type="number" class="f-max" placeholder="Max" step="0.01">' +
+          '</div>' +
+          '<div class="popup-footer"><button class="btn-reset">Zurücksetzen</button></div>' +
+        '</div>');
+
+        popup.find('.f-min, .f-max').on('input', function () {
+          filters[col] = { type: 'range', min: popup.find('.f-min').val(), max: popup.find('.f-max').val() };
+          var active = filters[col].min !== '' || filters[col].max !== '';
+          btn.toggleClass('active', active);
+          table.draw();
+        });
+
+        popup.find('.btn-reset').on('click', function () {
+          popup.find('input').val('');
+          delete filters[col];
+          btn.removeClass('active');
+          table.draw();
+        });
+
+      } else {
+        popup = $('<div class="filter-popup">' +
+          '<label>Suche</label>' +
+          '<input type="text" class="f-text" placeholder="…">' +
+          '<div class="popup-footer"><button class="btn-reset">Zurücksetzen</button></div>' +
+        '</div>');
+
+        popup.find('.f-text').on('input', function () {
+          var val = $(this).val();
+          table.column(col).search(val).draw();
+          btn.toggleClass('active', val !== '');
+        });
+
+        popup.find('.btn-reset').on('click', function () {
+          popup.find('input').val('');
+          table.column(col).search('').draw();
+          btn.removeClass('active');
+        });
+      }
+
+      // Attach popup to the th (for positioning)
+      btn.closest('th').css('position', 'relative').append(popup);
+
+      // Toggle popup on button click
+      btn.on('click', function (e) {
+        e.stopPropagation();
+        var isOpen = popup.hasClass('open');
+        // close any open popup
+        $('.filter-popup.open').removeClass('open');
+        openPopup = null;
+        if (!isOpen) {
+          popup.addClass('open');
+          openPopup = popup[0];
+          // focus first input
+          popup.find('input').first().focus();
+        }
+      });
+
+      // Prevent closing when clicking inside popup
+      popup.on('click', function (e) { e.stopPropagation(); });
+    });
+
+    // Close popup when clicking outside
+    $(document).on('click', function () {
+      $('.filter-popup.open').removeClass('open');
+      openPopup = null;
+    });
+  });
+</script>
+</body>
+</html>
