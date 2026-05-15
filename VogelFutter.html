@@ -10,83 +10,43 @@
 
     body {
       font-family: system-ui, -apple-system, sans-serif;
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       background: #f0f2f5;
       font-size: 15px;
     }
 
-    header {
-      background: #2c3e50;
-      color: white;
-      padding: 1rem;
-    }
+    header { background: #2c3e50; color: white; padding: 1rem; }
     header h1 { margin: 0 0 0.15rem; font-size: 1.2rem; }
     header p  { margin: 0; font-size: 0.8rem; opacity: 0.7; }
 
-    #tabelle_wrapper {
-      background: white;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
+    #tabelle_wrapper { background: white; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
     div.dataTables_wrapper div.dataTables_filter,
-    div.dataTables_wrapper div.dataTables_info {
-      padding: 0.75rem 1rem;
-    }
+    div.dataTables_wrapper div.dataTables_info { padding: 0.75rem 1rem; }
     div.dataTables_wrapper div.dataTables_filter { text-align: left; }
     div.dataTables_wrapper div.dataTables_filter input {
-      width: 100%;
-      margin-left: 0;
-      margin-top: 0.25rem;
-      padding: 0.5rem 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
+      width: 100%; margin-left: 0; margin-top: 0.25rem;
+      padding: 0.5rem 0.75rem; border: 1px solid #ccc;
+      border-radius: 6px; font-size: 1rem;
     }
     div.dataTables_wrapper div.dataTables_filter label {
-      display: block;
-      font-weight: 600;
-      font-size: 0.8rem;
-      color: #666;
+      display: block; font-weight: 600; font-size: 0.8rem; color: #666;
     }
-    div.dataTables_wrapper div.dataTables_info {
-      font-size: 0.8rem;
-      color: #888;
-      border-top: 1px solid #eee;
-    }
+    div.dataTables_wrapper div.dataTables_info { font-size: 0.8rem; color: #888; border-top: 1px solid #eee; }
 
-    table.dataTable {
-      font-size: 0.85rem;
-      margin: 0 !important;
-      width: 100% !important;
-    }
+    table.dataTable { font-size: 0.85rem; margin: 0 !important; width: 100% !important; }
     table.dataTable thead th {
-      background: #2c3e50;
-      color: white;
-      white-space: nowrap;
-      position: relative;
-      padding: 0.6rem 0.5rem !important;
-      border-bottom: none !important;
+      background: #2c3e50; color: white; white-space: nowrap;
+      position: relative; padding: 0.6rem 0.5rem !important; border-bottom: none !important;
     }
     table.dataTable thead th .th-inner {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      justify-content: space-between;
+      display: flex; align-items: center; gap: 4px; justify-content: space-between;
     }
-    table.dataTable tbody td {
-      padding: 0.55rem 0.6rem !important;
-      border-bottom: 1px solid #f0f0f0;
-    }
+    table.dataTable tbody td { padding: 0.55rem 0.6rem !important; border-bottom: 1px solid #f0f0f0; }
     table.dataTable tbody tr:hover td { background: #f8f9fa; }
 
     table.dataTable thead th:first-child,
-    table.dataTable tbody td:first-child {
-      position: sticky;
-      left: 0;
-      z-index: 2;
-    }
+    table.dataTable tbody td:first-child { position: sticky; left: 0; z-index: 2; }
     table.dataTable thead th:first-child { z-index: 3; background: #2c3e50; }
     table.dataTable tbody td:first-child { background: white; border-right: 2px solid #e0e0e0; }
     table.dataTable tbody tr:hover td:first-child { background: #f8f9fa; }
@@ -94,26 +54,25 @@
 
     td { white-space: nowrap; }
     td.name { white-space: normal; min-width: 180px; max-width: 260px; }
-    td.vogel { white-space: normal; min-width: 160px; max-width: 240px; font-size: 0.8rem; color: #444; }
     td.num { text-align: right; }
     td.mindest { text-align: center; }
 
+    /* Stars + Vogelarten cell */
+    td.vogel { white-space: normal; min-width: 180px; max-width: 240px; }
+    .stars { display: block; color: #e6a817; font-size: 0.95rem; letter-spacing: 1px; line-height: 1.3; }
+    .vogel-text { display: block; font-size: 0.75rem; color: #666; margin-top: 3px; }
+
     tr.ausgeschieden td { text-decoration: line-through; color: #bbb; }
     tr.ausgeschieden td.grund { text-decoration: none; color: #e74c3c; font-style: italic; }
+    tr.ausgeschieden .stars { color: #ccc; }
 
+    /* Filter button */
     .filter-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      min-width: 44px;
-      min-height: 44px;
+      background: none; border: none; cursor: pointer;
+      min-width: 44px; min-height: 44px;
       margin: -10px -6px -10px 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      border-radius: 6px;
-      opacity: 0.55;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; border-radius: 6px; opacity: 0.55;
       transition: opacity 0.15s, background 0.15s;
       -webkit-tap-highlight-color: transparent;
     }
@@ -123,135 +82,52 @@
     .filter-btn svg { width: 14px; height: 14px; pointer-events: none; }
     .filter-btn svg path { fill: white; }
 
-    .overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.45);
-      z-index: 999;
-    }
+    /* Overlay + popup */
+    .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 999; }
     .overlay.active { display: block; }
 
     .filter-popup {
-      display: none;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: white;
-      border-radius: 16px 16px 0 0;
+      display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 1000;
+      background: white; border-radius: 16px 16px 0 0;
       box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
       padding: 1.25rem 1.25rem calc(1.25rem + env(safe-area-inset-bottom));
       color: #333;
     }
     .filter-popup.open { display: block; animation: slideUp 0.22s ease; }
+    @keyframes slideUp { from { transform: translateY(100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-    @keyframes slideUp {
-      from { transform: translateY(100%); opacity: 0; }
-      to   { transform: translateY(0);   opacity: 1; }
-    }
-
-    .popup-handle {
-      width: 36px; height: 4px;
-      background: #ddd; border-radius: 2px;
-      margin: 0 auto 1rem;
-    }
+    .popup-handle { width: 36px; height: 4px; background: #ddd; border-radius: 2px; margin: 0 auto 1rem; }
     .popup-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.75rem; color: #2c3e50; }
-    .filter-popup label {
-      display: block; font-size: 0.75rem; font-weight: 600;
-      color: #888; margin-bottom: 0.35rem;
-      text-transform: uppercase; letter-spacing: 0.05em;
-    }
-    .filter-popup input {
-      width: 100%; padding: 0.6rem 0.75rem;
-      border: 1.5px solid #ddd; border-radius: 8px;
-      font-size: 1rem; outline: none;
-      transition: border-color 0.15s; -webkit-appearance: none; appearance: none;
-    }
+    .filter-popup label { display: block; font-size: 0.75rem; font-weight: 600; color: #888; margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .filter-popup input { width: 100%; padding: 0.6rem 0.75rem; border: 1.5px solid #ddd; border-radius: 8px; font-size: 1rem; outline: none; transition: border-color 0.15s; -webkit-appearance: none; appearance: none; }
     .filter-popup input:focus { border-color: #2c3e50; }
     .filter-popup .range-row { display: flex; gap: 0.5rem; align-items: center; }
     .filter-popup .range-row input { width: 0; flex: 1; }
     .filter-popup .range-row span { color: #aaa; font-size: 1.1rem; flex-shrink: 0; }
     .filter-popup .popup-footer { display: flex; gap: 0.5rem; margin-top: 1rem; }
-    .filter-popup .btn-reset {
-      flex: 1; background: #f0f2f5; border: none;
-      border-radius: 8px; padding: 0.65rem;
-      font-size: 0.95rem; cursor: pointer; color: #555; font-weight: 500;
-    }
-    .filter-popup .btn-close {
-      flex: 1; background: #2c3e50; border: none;
-      border-radius: 8px; padding: 0.65rem;
-      font-size: 0.95rem; cursor: pointer; color: white; font-weight: 600;
-    }
+    .filter-popup .btn-reset { flex: 1; background: #f0f2f5; border: none; border-radius: 8px; padding: 0.65rem; font-size: 0.95rem; cursor: pointer; color: #555; font-weight: 500; }
+    .filter-popup .btn-close { flex: 1; background: #2c3e50; border: none; border-radius: 8px; padding: 0.65rem; font-size: 0.95rem; cursor: pointer; color: white; font-weight: 600; }
 
-    /* ── Waldrand-Info-Sektion ───────────────────────────── */
-    .waldrand-section {
-      padding: 1rem;
-      background: white;
-      border-bottom: 1px solid #e8e8e8;
-    }
-    .waldrand-section h2 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #2c3e50;
-      margin: 0 0 0.25rem;
-    }
-    .waldrand-section .subtitle {
-      font-size: 0.78rem;
-      color: #888;
-      margin: 0 0 0.9rem;
-    }
-    .vogel-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.5rem;
-    }
-    .vogel-gruppe {
-      background: #f7f9fc;
-      border-radius: 8px;
-      padding: 0.6rem 0.75rem;
-      border-left: 3px solid #2c3e50;
-    }
-    .vogel-gruppe h3 {
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #2c3e50;
-      margin: 0 0 0.35rem;
-    }
-    .vogel-gruppe ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-    .vogel-gruppe ul li {
-      font-size: 0.8rem;
-      color: #444;
-      padding: 0.1rem 0;
-      display: flex;
-      align-items: baseline;
-      gap: 0.35rem;
-    }
-    .vogel-gruppe ul li::before {
-      content: "·";
-      color: #aaa;
-      flex-shrink: 0;
-    }
+    /* Waldrand Info */
+    .waldrand-section { padding: 1rem; background: white; border-bottom: 1px solid #e8e8e8; }
+    .waldrand-section h2 { font-size: 1rem; font-weight: 700; color: #2c3e50; margin: 0 0 0.25rem; }
+    .waldrand-section .subtitle { font-size: 0.78rem; color: #888; margin: 0 0 0.9rem; }
+    .vogel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+    .vogel-gruppe { background: #f7f9fc; border-radius: 8px; padding: 0.6rem 0.75rem; border-left: 3px solid #2c3e50; }
+    .vogel-gruppe h3 { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #2c3e50; margin: 0 0 0.35rem; }
+    .vogel-gruppe ul { margin: 0; padding: 0; list-style: none; }
+    .vogel-gruppe ul li { font-size: 0.8rem; color: #444; padding: 0.1rem 0; display: flex; align-items: baseline; gap: 0.35rem; }
+    .vogel-gruppe ul li::before { content: "·"; color: #aaa; flex-shrink: 0; }
 
-    @media (min-width: 700px) {
-      .waldrand-section { padding: 1.25rem 2rem 1.5rem; }
-      .waldrand-section h2 { font-size: 1.1rem; }
-      .vogel-grid { grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
-    }
-
+    /* Desktop */
     @media (min-width: 700px) {
       header { padding: 1.5rem 2rem; }
       header h1 { font-size: 1.5rem; }
+      .waldrand-section { padding: 1.25rem 2rem 1.5rem; }
+      .waldrand-section h2 { font-size: 1.1rem; }
+      .vogel-grid { grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
 
-      #tabelle_wrapper { margin: 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: visible; }
-      #tabelle_wrapper { overflow-x: auto; }
+      #tabelle_wrapper { margin: 1.5rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow-x: auto; }
 
       div.dataTables_wrapper div.dataTables_filter { text-align: right; }
       div.dataTables_wrapper div.dataTables_filter label { display: inline; }
@@ -265,8 +141,7 @@
         position: absolute; bottom: auto; left: 0; right: auto;
         top: calc(100% + 4px); border-radius: 8px;
         box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-        padding: 0.9rem; min-width: 200px;
-        animation: none;
+        padding: 0.9rem; min-width: 200px; animation: none;
       }
       .filter-popup.open { animation: fadeIn 0.12s ease; }
       @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
@@ -278,7 +153,6 @@
       .filter-popup .btn-close { display: none; }
       .filter-popup .btn-reset { flex: none; padding: 0.35rem 0.9rem; font-size: 0.82rem; border-radius: 5px; }
       .filter-popup .popup-footer { justify-content: flex-end; margin-top: 0.6rem; }
-
       .overlay { display: none !important; }
     }
   </style>
@@ -292,50 +166,34 @@
 
 <section class="waldrand-section">
   <h2>🌳 Wildvögel am Waldrand Zürich</h2>
-  <p class="subtitle">Häufige Arten in urbanen Waldrandgebieten der Stadt Zürich — Grundlage für die Futterwahl</p>
+  <p class="subtitle">Häufige Arten in urbanen Waldrandgebieten der Stadt Zürich — Grundlage für die Sternebewertung (10★ = alle 24 Arten abgedeckt)</p>
   <div class="vogel-grid">
     <div class="vogel-gruppe">
       <h3>Meisen &amp; Kleiber</h3>
       <ul>
-        <li>Kohlmeise</li>
-        <li>Blaumeise</li>
-        <li>Tannenmeise</li>
-        <li>Sumpfmeise</li>
-        <li>Kleiber</li>
-        <li>Gartenbaumläufer</li>
+        <li>Kohlmeise</li><li>Blaumeise</li><li>Tannenmeise</li>
+        <li>Sumpfmeise</li><li>Kleiber</li><li>Gartenbaumläufer</li>
       </ul>
     </div>
     <div class="vogel-gruppe">
-      <h3>Finken &amp; Körner­fresser</h3>
+      <h3>Finken &amp; Körnerfresser</h3>
       <ul>
-        <li>Buchfink</li>
-        <li>Grünfink</li>
-        <li>Stieglitz (Distelfink)</li>
-        <li>Haussperling</li>
-        <li>Gimpel</li>
-        <li>Erlenzeisig</li>
+        <li>Buchfink</li><li>Grünfink</li><li>Stieglitz</li>
+        <li>Haussperling</li><li>Gimpel</li><li>Erlenzeisig</li>
       </ul>
     </div>
     <div class="vogel-gruppe">
-      <h3>Weich­futter­fresser</h3>
+      <h3>Weichfutterfresser</h3>
       <ul>
-        <li>Amsel</li>
-        <li>Rotkehlchen</li>
-        <li>Singdrossel</li>
-        <li>Hausrotschwanz</li>
-        <li>Zaunkönig</li>
-        <li>Mönchsgrasmücke</li>
+        <li>Amsel</li><li>Rotkehlchen</li><li>Singdrossel</li>
+        <li>Hausrotschwanz</li><li>Zaunkönig</li><li>Mönchsgrasmücke</li>
       </ul>
     </div>
     <div class="vogel-gruppe">
       <h3>Spechte &amp; Weitere</h3>
       <ul>
-        <li>Buntspecht</li>
-        <li>Grünspecht</li>
-        <li>Eichelhäher</li>
-        <li>Elster</li>
-        <li>Star</li>
-        <li>Dohle</li>
+        <li>Buntspecht</li><li>Grünspecht</li><li>Eichelhäher</li>
+        <li>Elster</li><li>Star</li><li>Dohle</li>
       </ul>
     </div>
   </div>
@@ -352,57 +210,57 @@
       <th><div class="th-inner"><span>CHF/kg</span><button class="filter-btn" data-col="3" data-type="range" data-label="CHF/kg">ICON</button></div></th>
       <th><div class="th-inner"><span>Mindestmenge</span><button class="filter-btn" data-col="4" data-type="text" data-label="Mindestmenge">ICON</button></div></th>
       <th><div class="th-inner"><span>Art</span><button class="filter-btn" data-col="5" data-type="text" data-label="Art">ICON</button></div></th>
-      <th><div class="th-inner"><span>Geeignet für</span><button class="filter-btn" data-col="6" data-type="text" data-label="Geeignet für">ICON</button></div></th>
+      <th><div class="th-inner"><span>Geeignet für</span><button class="filter-btn" data-col="6" data-type="text" data-label="Geeignet für (Vogelarten)">ICON</button></div></th>
       <th><div class="th-inner"><span>Ausscheidungsgrund</span><button class="filter-btn" data-col="7" data-type="text" data-label="Ausscheidungsgrund">ICON</button></div></th>
     </tr>
   </thead>
   <tbody>
-    <tr><td class="name">CJ Wildbird Vogel-Streufutter Hoch-Energiemix</td><td class="num">2000</td><td class="num">22.50</td><td class="num">11.25</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Meisen, Finken, Rotkehlchen, Kleiber, Buntspecht, Kohlmeise, Blaumeise, Star</td><td></td></tr>
-    <tr><td class="name">CJ Wildlife Gestreifte Sonnenblumenkerne</td><td class="num">2500</td><td class="num">35.00</td><td class="num">14.00</td><td class="mindest"></td><td>Sonnenblumenkerne</td><td class="vogel">Amseln, Meisen, Stieglitze, Rotkehlchen, Buchfinken</td><td></td></tr>
-    <tr><td class="name">CJ Wildlife Vogelfutter für Futtersäule</td><td class="num">1750</td><td class="num">11.70</td><td class="num">6.69</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Buchfink, Kohlmeise, Haussperling, Grünfink, Bergfink</td><td></td></tr>
-    <tr><td class="name">Donath Balkon Mix</td><td class="num">1020</td><td class="num">8.50</td><td class="num">8.33</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Alle Wildvögel / Gartenvögel</td><td></td></tr>
-    <tr><td class="name">Donath Balkon Mix</td><td class="num">5000</td><td class="num">30.70</td><td class="num">6.14</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Alle Wildvögel / Gartenvögel</td><td></td></tr>
-    <tr><td class="name">Donath Energie Mix</td><td class="num">1000</td><td class="num">8.50</td><td class="num">8.50</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Rotkehlchen, Amsel, Star, alle Meisen</td><td></td></tr>
-    <tr><td class="name">Donath Komplett Mix</td><td class="num">1000</td><td class="num">12.20</td><td class="num">12.20</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Körnerfresser, Weichfutterfresser, alle Gartenvögel</td><td></td></tr>
-    <tr><td class="name">Erdtmann Erdnussbruch</td><td class="num">1000</td><td class="num">10.10</td><td class="num">10.10</td><td class="mindest"></td><td>Erdnussbruch</td><td class="vogel">Meisen, Kleiber, Spechte, Eichelhäher</td><td></td></tr>
-    <tr><td class="name">Erdtmann Meisenfutter</td><td class="num">1000</td><td class="num">11.50</td><td class="num">11.50</td><td class="mindest"></td><td>Meisenfutter</td><td class="vogel">Kohlmeise, Blaumeise, Tannenmeise, Sumpfmeise</td><td></td></tr>
-    <tr><td class="name">Erdtmann Meisenfutter</td><td class="num">5000</td><td class="num">33.90</td><td class="num">6.78</td><td class="mindest"></td><td>Meisenfutter</td><td class="vogel">Kohlmeise, Blaumeise, Tannenmeise, Sumpfmeise</td><td></td></tr>
-    <tr><td class="name">Erdtmann Streufutter</td><td class="num">2500</td><td class="num">6.70</td><td class="num">2.68</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Buchfinken, Drosseln, Zeisige, Stare</td><td></td></tr>
-    <tr><td class="name">Erdtmann Vogelfutter/Streufutter 1000 g</td><td class="num">1000</td><td class="num">24.40</td><td class="num">24.40</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Singvögel, Buchfinken</td><td></td></tr>
-    <tr><td class="name">GoWild Erdnusskernbruch</td><td class="num">2500</td><td class="num">19.90</td><td class="num">7.96</td><td class="mindest"></td><td>Erdnussbruch</td><td class="vogel">Meisen, Kleiber, Zaunkönig, Spechte</td><td></td></tr>
-    <tr><td class="name">GoWild Streufutter mit Früchten</td><td class="num">2500</td><td class="num">18.70</td><td class="num">7.48</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Amseln, Drosseln, Rotkehlchen, Stare</td><td></td></tr>
-    <tr><td class="name">GoWild Streufutter mit Insekten</td><td class="num">2500</td><td class="num">17.90</td><td class="num">7.16</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Rotkehlchen, Amseln, Meisen, Zaunkönig</td><td></td></tr>
-    <tr><td class="name">Lyra Pet Fettfutter</td><td class="num">10000</td><td class="num">40.80</td><td class="num">4.08</td><td class="mindest"></td><td>Fettfutter</td><td class="vogel">Amseln, Rotkehlchen, Meisen</td><td></td></tr>
-    <tr><td class="name">Lyra Pet Streufutter</td><td class="num">10000</td><td class="num">27.80</td><td class="num">2.78</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Finken, Meisen, Spatzen, Kleiber, Gimpel, Specht</td><td></td></tr>
-    <tr><td class="name">MGA 30893</td><td class="num">1000</td><td class="num">5.50</td><td class="num">5.50</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel">Alle Wildvögel</td><td></td></tr>
-    <tr><td class="name">Natura Punto Vogelfutter</td><td class="num">30</td><td class="num">12.95</td><td class="num">431.67</td><td class="mindest"></td><td>Vogelfutter-Snack</td><td class="vogel">Alle Gartenvögel</td><td></td></tr>
-    <tr class="ausgeschieden"><td class="name">Panto Fettfutter</td><td class="num">1000</td><td class="num">6.05</td><td class="num">6.05</td><td class="mindest">❗ 5</td><td>Fettfutter</td><td class="vogel">Meisen, Spechte, Kleiber, Rotkehlchen</td><td class="grund">Mindestbestellmenge</td></tr>
-    <tr><td class="name">Panto Sonnenblumenkerne gestreift</td><td class="num">1000</td><td class="num">6.50</td><td class="num">6.50</td><td class="mindest"></td><td>Sonnenblumenkerne</td><td class="vogel">Meisen, Finken, Spatzen, Spechte</td><td></td></tr>
-    <tr><td class="name">Panto Streufutter</td><td class="num">1000</td><td class="num">7.50</td><td class="num">7.50</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Alle Gartenvögel</td><td></td></tr>
-    <tr><td class="name">Panto Vierjahreszeiten Mix</td><td class="num">1000</td><td class="num">5.90</td><td class="num">5.90</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Alle Gartenvögel (ganzjährig)</td><td></td></tr>
-    <tr><td class="name">Schweizer Classic 5</td><td class="num">5000</td><td class="num">17.70</td><td class="num">3.54</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel">Körnerfresser, Weichfutterfresser</td><td></td></tr>
-    <tr><td class="name">Schweizer Eric</td><td class="num">5000</td><td class="num">29.90</td><td class="num">5.98</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel">Alle Wildvögel</td><td></td></tr>
-    <tr><td class="name">Schweizer Eric Vogelfutter Mehlwürmer</td><td class="num">1800</td><td class="num">35.70</td><td class="num">19.83</td><td class="mindest"></td><td>Mehlwürmer</td><td class="vogel">Rotkehlchen, Amsel, Meisen, Star</td><td></td></tr>
-    <tr><td class="name">Schweizer Eric Wildvogelmischung Delicatess</td><td class="num">5000</td><td class="num">69.65</td><td class="num">13.93</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel">Finken, Meisen, Spatzen, Wildvögel</td><td></td></tr>
-    <tr><td class="name">Schweizer Eric Wildvogelmischung Delicatess</td><td class="num">600</td><td class="num">12.85</td><td class="num">21.42</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel">Finken, Meisen, Spatzen, Wildvögel</td><td></td></tr>
-    <tr><td class="name">Schweizer Eric Wildvogelmischung Energy</td><td class="num">5000</td><td class="num">34.90</td><td class="num">6.98</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel">Körnerfresser, Weichfutterfresser (Winter)</td><td></td></tr>
-    <tr><td class="name">Schweizer Eric Wildvogelmischung Premium</td><td class="num">1000</td><td class="num">7.90</td><td class="num">7.90</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel">Alle Wildvögel</td><td></td></tr>
-    <tr><td class="name">Schweizer Eric Wildvogelmischung Terrace</td><td class="num">5000</td><td class="num">23.70</td><td class="num">4.74</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel">Finken, Meisen, Ammern, Spatzen</td><td></td></tr>
-    <tr><td class="name">Schweizer Vogelfutter Mehlwürmer</td><td class="num">250</td><td class="num">9.50</td><td class="num">38.00</td><td class="mindest"></td><td>Mehlwürmer</td><td class="vogel">Rotkehlchen, Amsel, Meisen</td><td></td></tr>
-    <tr><td class="name">Schweizer Wildtierfutter Summer</td><td class="num">2500</td><td class="num">15.70</td><td class="num">6.28</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Stieglitze, Zeisige, Sommervögel</td><td></td></tr>
-    <tr><td class="name">Schweizer Wildvogelmischung (Art.-Nr. 49606158)</td><td class="num">5000</td><td class="num">30.00</td><td class="num">6.00</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel">Alle Wildvögel</td><td></td></tr>
-    <tr><td class="name">Schweizer Wildvogelmischung (Art.-Nr. 53626885)</td><td class="num">5000</td><td class="num">24.00</td><td class="num">4.80</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel">Alle Wildvögel</td><td></td></tr>
-    <tr><td class="name">Schweizer Wildvogelmischung Classic</td><td class="num">1000</td><td class="num">5.70</td><td class="num">5.70</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel">Körnerfresser, Weichfutterfresser</td><td></td></tr>
-    <tr><td class="name">Versele Laga Allround Mix</td><td class="num">15000</td><td class="num">30.90</td><td class="num">2.06</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Alle Gartenvögel (ganzjährig)</td><td></td></tr>
-    <tr><td class="name">Versele Laga Clean Garden Blend</td><td class="num">2500</td><td class="num">11.70</td><td class="num">4.68</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Alle Wildvögel (ganzjährig, kein Schalenabfall)</td><td></td></tr>
-    <tr><td class="name">Versele Laga Frost Nights Blend</td><td class="num">2580</td><td class="num">23.90</td><td class="num">9.26</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Wintervögel, Meisen, Amseln (bei Frost)</td><td></td></tr>
-    <tr><td class="name">Versele Laga Gourmet Blend</td><td class="num">3000</td><td class="num">18.90</td><td class="num">6.30</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Wintervögel, Meisen, Rotkehlchen</td><td></td></tr>
-    <tr><td class="name">Versele Laga Insect mix</td><td class="num">250</td><td class="num">15.90</td><td class="num">63.60</td><td class="mindest"></td><td>Insektenmix</td><td class="vogel">Brütende Vögel, Rotkehlchen, Amseln, Jungvögel</td><td></td></tr>
-    <tr><td class="name">Versele Laga Menu Nature Jahreszeiten</td><td class="num">1000</td><td class="num">7.20</td><td class="num">7.20</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Alle Gartenvögel (ganzjährig)</td><td></td></tr>
-    <tr><td class="name">Versele Laga Nesting Blend</td><td class="num">2500</td><td class="num">28.90</td><td class="num">11.56</td><td class="mindest"></td><td>Nistfutter</td><td class="vogel">Brütende Vögel, Jungvögel (Frühling/Sommer)</td><td></td></tr>
-    <tr><td class="name">Versele Laga Sunflower hearts</td><td class="num">750</td><td class="num">12.20</td><td class="num">16.27</td><td class="mindest"></td><td>Sonnenblumenkerne</td><td class="vogel">Meisen, Finken, Gimpel</td><td></td></tr>
-    <tr><td class="name">Versele Laga MN 4 Seasons Blend Promo</td><td class="num">4400</td><td class="num">13.90</td><td class="num">3.16</td><td class="mindest"></td><td>Streufutter</td><td class="vogel">Alle Gartenvögel (ganzjährig)</td><td></td></tr>
-    <tr><td class="name">Vitakraft VitaGarden Erdnüsse geschält</td><td class="num">500</td><td class="num">5.50</td><td class="num">11.00</td><td class="mindest"></td><td>Erdnüsse</td><td class="vogel">Meisen, Kleiber, Spechte</td><td></td></tr>
+    <tr><td class="name">CJ Wildbird Vogel-Streufutter Hoch-Energiemix</td><td class="num">2000</td><td class="num">22.50</td><td class="num">11.25</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="4"><span class="stars">★★★★☆☆☆☆☆☆</span><span class="vogel-text">Meisen, Finken, Rotkehlchen, Kleiber, Buntspecht, Kohlmeise, Blaumeise, Star</span></td><td></td></tr>
+    <tr><td class="name">CJ Wildlife Gestreifte Sonnenblumenkerne</td><td class="num">2500</td><td class="num">35.00</td><td class="num">14.00</td><td class="mindest"></td><td>Sonnenblumenkerne</td><td class="vogel" data-order="3"><span class="stars">★★★☆☆☆☆☆☆☆</span><span class="vogel-text">Amseln, Meisen, Stieglitze, Rotkehlchen, Buchfinken</span></td><td></td></tr>
+    <tr><td class="name">CJ Wildlife Vogelfutter für Futtersäule</td><td class="num">1750</td><td class="num">11.70</td><td class="num">6.69</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="2"><span class="stars">★★☆☆☆☆☆☆☆☆</span><span class="vogel-text">Buchfink, Kohlmeise, Haussperling, Grünfink, Bergfink</span></td><td></td></tr>
+    <tr><td class="name">Donath Balkon Mix</td><td class="num">1020</td><td class="num">8.50</td><td class="num">8.33</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="10"><span class="stars">★★★★★★★★★★</span><span class="vogel-text">Alle Wildvögel / Gartenvögel</span></td><td></td></tr>
+    <tr><td class="name">Donath Balkon Mix</td><td class="num">5000</td><td class="num">30.70</td><td class="num">6.14</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="10"><span class="stars">★★★★★★★★★★</span><span class="vogel-text">Alle Wildvögel / Gartenvögel</span></td><td></td></tr>
+    <tr><td class="name">Donath Energie Mix</td><td class="num">1000</td><td class="num">8.50</td><td class="num">8.50</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="3"><span class="stars">★★★☆☆☆☆☆☆☆</span><span class="vogel-text">Rotkehlchen, Amsel, Star, alle Meisen</span></td><td></td></tr>
+    <tr><td class="name">Donath Komplett Mix</td><td class="num">1000</td><td class="num">12.20</td><td class="num">12.20</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="10"><span class="stars">★★★★★★★★★★</span><span class="vogel-text">Körnerfresser, Weichfutterfresser, alle Gartenvögel</span></td><td></td></tr>
+    <tr><td class="name">Erdtmann Erdnussbruch</td><td class="num">1000</td><td class="num">10.10</td><td class="num">10.10</td><td class="mindest"></td><td>Erdnussbruch</td><td class="vogel" data-order="3"><span class="stars">★★★☆☆☆☆☆☆☆</span><span class="vogel-text">Meisen, Kleiber, Spechte, Eichelhäher</span></td><td></td></tr>
+    <tr><td class="name">Erdtmann Meisenfutter</td><td class="num">1000</td><td class="num">11.50</td><td class="num">11.50</td><td class="mindest"></td><td>Meisenfutter</td><td class="vogel" data-order="2"><span class="stars">★★☆☆☆☆☆☆☆☆</span><span class="vogel-text">Kohlmeise, Blaumeise, Tannenmeise, Sumpfmeise</span></td><td></td></tr>
+    <tr><td class="name">Erdtmann Meisenfutter</td><td class="num">5000</td><td class="num">33.90</td><td class="num">6.78</td><td class="mindest"></td><td>Meisenfutter</td><td class="vogel" data-order="2"><span class="stars">★★☆☆☆☆☆☆☆☆</span><span class="vogel-text">Kohlmeise, Blaumeise, Tannenmeise, Sumpfmeise</span></td><td></td></tr>
+    <tr><td class="name">Erdtmann Streufutter</td><td class="num">2500</td><td class="num">6.70</td><td class="num">2.68</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="2"><span class="stars">★★☆☆☆☆☆☆☆☆</span><span class="vogel-text">Buchfinken, Drosseln, Zeisige, Stare</span></td><td></td></tr>
+    <tr><td class="name">Erdtmann Vogelfutter/Streufutter 1000 g</td><td class="num">1000</td><td class="num">24.40</td><td class="num">24.40</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="8"><span class="stars">★★★★★★★★☆☆</span><span class="vogel-text">Singvögel, Buchfinken</span></td><td></td></tr>
+    <tr><td class="name">GoWild Erdnusskernbruch</td><td class="num">2500</td><td class="num">19.90</td><td class="num">7.96</td><td class="mindest"></td><td>Erdnussbruch</td><td class="vogel" data-order="3"><span class="stars">★★★☆☆☆☆☆☆☆</span><span class="vogel-text">Meisen, Kleiber, Zaunkönig, Spechte</span></td><td></td></tr>
+    <tr><td class="name">GoWild Streufutter mit Früchten</td><td class="num">2500</td><td class="num">18.70</td><td class="num">7.48</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="2"><span class="stars">★★☆☆☆☆☆☆☆☆</span><span class="vogel-text">Amseln, Drosseln, Rotkehlchen, Stare</span></td><td></td></tr>
+    <tr><td class="name">GoWild Streufutter mit Insekten</td><td class="num">2500</td><td class="num">17.90</td><td class="num">7.16</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="3"><span class="stars">★★★☆☆☆☆☆☆☆</span><span class="vogel-text">Rotkehlchen, Amseln, Meisen, Zaunkönig</span></td><td></td></tr>
+    <tr><td class="name">Lyra Pet Fettfutter</td><td class="num">10000</td><td class="num">40.80</td><td class="num">4.08</td><td class="mindest"></td><td>Fettfutter</td><td class="vogel" data-order="3"><span class="stars">★★★☆☆☆☆☆☆☆</span><span class="vogel-text">Amseln, Rotkehlchen, Meisen</span></td><td></td></tr>
+    <tr><td class="name">Lyra Pet Streufutter</td><td class="num">10000</td><td class="num">27.80</td><td class="num">2.78</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="4"><span class="stars">★★★★☆☆☆☆☆☆</span><span class="vogel-text">Finken, Meisen, Spatzen, Kleiber, Gimpel, Specht</span></td><td></td></tr>
+    <tr><td class="name">MGA 30893</td><td class="num">1000</td><td class="num">5.50</td><td class="num">5.50</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel" data-order="10"><span class="stars">★★★★★★★★★★</span><span class="vogel-text">Alle Wildvögel</span></td><td></td></tr>
+    <tr><td class="name">Natura Punto Vogelfutter</td><td class="num">30</td><td class="num">12.95</td><td class="num">431.67</td><td class="mindest"></td><td>Vogelfutter-Snack</td><td class="vogel" data-order="10"><span class="stars">★★★★★★★★★★</span><span class="vogel-text">Alle Gartenvögel</span></td><td></td></tr>
+    <tr class="ausgeschieden"><td class="name">Panto Fettfutter</td><td class="num">1000</td><td class="num">6.05</td><td class="num">6.05</td><td class="mindest">❗ 5</td><td>Fettfutter</td><td class="vogel" data-order="3"><span class="stars">★★★☆☆☆☆☆☆☆</span><span class="vogel-text">Meisen, Spechte, Kleiber, Rotkehlchen</span></td><td class="grund">Mindestbestellmenge</td></tr>
+    <tr><td class="name">Panto Sonnenblumenkerne gestreift</td><td class="num">1000</td><td class="num">6.50</td><td class="num">6.50</td><td class="mindest"></td><td>Sonnenblumenkerne</td><td class="vogel" data-order="4"><span class="stars">★★★★☆☆☆☆☆☆</span><span class="vogel-text">Meisen, Finken, Spatzen, Spechte</span></td><td></td></tr>
+    <tr><td class="name">Panto Streufutter</td><td class="num">1000</td><td class="num">7.50</td><td class="num">7.50</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="10"><span class="stars">★★★★★★★★★★</span><span class="vogel-text">Alle Gartenvögel</span></td><td></td></tr>
+    <tr><td class="name">Panto Vierjahreszeiten Mix</td><td class="num">1000</td><td class="num">5.90</td><td class="num">5.90</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="10"><span class="stars">★★★★★★★★★★</span><span class="vogel-text">Alle Gartenvögel (ganzjährig)</span></td><td></td></tr>
+    <tr><td class="name">Schweizer Classic 5</td><td class="num">5000</td><td class="num">17.70</td><td class="num">3.54</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel" data-order="7"><span class="stars">★★★★★★★☆☆☆</span><span class="vogel-text">Körnerfresser, Weichfutterfresser</span></td><td></td></tr>
+    <tr><td class="name">Schweizer Eric</td><td class="num">5000</td><td class="num">29.90</td><td class="num">5.98</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel" data-order="10"><span class="stars">★★★★★★★★★★</span><span class="vogel-text">Alle Wildvögel</span></td><td></td></tr>
+    <tr><td class="name">Schweizer Eric Vogelfutter Mehlwürmer</td><td class="num">1800</td><td class="num">35.70</td><td class="num">19.83</td><td class="mindest"></td><td>Mehlwürmer</td><td class="vogel" data-order="3"><span class="stars">★★★☆☆☆☆☆☆☆</span><span class="vogel-text">Rotkehlchen, Amsel, Meisen, Star</span></td><td></td></tr>
+    <tr><td class="name">Schweizer Eric Wildvogelmischung Delicatess</td><td class="num">5000</td><td class="num">69.65</td><td class="num">13.93</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel" data-order="10"><span class="stars">★★★★★★★★★★</span><span class="vogel-text">Finken, Meisen, Spatzen, Wildvögel</span></td><td></td></tr>
+    <tr><td class="name">Schweizer Eric Wildvogelmischung Delicatess</td><td class="num">600</td><td class="num">12.85</td><td class="num">21.42</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel" data-order="10"><span class="stars">★★★★★★★★★★</span><span class="vogel-text">Finken, Meisen, Spatzen, Wildvögel</span></td><td></td></tr>
+    <tr><td class="name">Schweizer Eric Wildvogelmischung Energy</td><td class="num">5000</td><td class="num">34.90</td><td class="num">6.98</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel" data-order="7"><span class="stars">★★★★★★★☆☆☆</span><span class="vogel-text">Körnerfresser, Weichfutterfresser (Winter)</span></td><td></td></tr>
+    <tr><td class="name">Schweizer Eric Wildvogelmischung Premium</td><td class="num">1000</td><td class="num">7.90</td><td class="num">7.90</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel" data-order="10"><span class="stars">★★★★★★★★★★</span><span class="vogel-text">Alle Wildvögel</span></td><td></td></tr>
+    <tr><td class="name">Schweizer Eric Wildvogelmischung Terrace</td><td class="num">5000</td><td class="num">23.70</td><td class="num">4.74</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel" data-order="3"><span class="stars">★★★☆☆☆☆☆☆☆</span><span class="vogel-text">Finken, Meisen, Ammern, Spatzen</span></td><td></td></tr>
+    <tr><td class="name">Schweizer Vogelfutter Mehlwürmer</td><td class="num">250</td><td class="num">9.50</td><td class="num">38.00</td><td class="mindest"></td><td>Mehlwürmer</td><td class="vogel" data-order="3"><span class="stars">★★★☆☆☆☆☆☆☆</span><span class="vogel-text">Rotkehlchen, Amsel, Meisen</span></td><td></td></tr>
+    <tr><td class="name">Schweizer Wildtierfutter Summer</td><td class="num">2500</td><td class="num">15.70</td><td class="num">6.28</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="2"><span class="stars">★★☆☆☆☆☆☆☆☆</span><span class="vogel-text">Stieglitze, Zeisige, Sommervögel</span></td><td></td></tr>
+    <tr><td class="name">Schweizer Wildvogelmischung (Art.-Nr. 49606158)</td><td class="num">5000</td><td class="num">30.00</td><td class="num">6.00</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel" data-order="10"><span class="stars">★★★★★★★★★★</span><span class="vogel-text">Alle Wildvögel</span></td><td></td></tr>
+    <tr><td class="name">Schweizer Wildvogelmischung (Art.-Nr. 53626885)</td><td class="num">5000</td><td class="num">24.00</td><td class="num">4.80</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel" data-order="10"><span class="stars">★★★★★★★★★★</span><span class="vogel-text">Alle Wildvögel</span></td><td></td></tr>
+    <tr><td class="name">Schweizer Wildvogelmischung Classic</td><td class="num">1000</td><td class="num">5.70</td><td class="num">5.70</td><td class="mindest"></td><td>Wildvogelmischung</td><td class="vogel" data-order="7"><span class="stars">★★★★★★★☆☆☆</span><span class="vogel-text">Körnerfresser, Weichfutterfresser</span></td><td></td></tr>
+    <tr><td class="name">Versele Laga Allround Mix</td><td class="num">15000</td><td class="num">30.90</td><td class="num">2.06</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="10"><span class="stars">★★★★★★★★★★</span><span class="vogel-text">Alle Gartenvögel (ganzjährig)</span></td><td></td></tr>
+    <tr><td class="name">Versele Laga Clean Garden Blend</td><td class="num">2500</td><td class="num">11.70</td><td class="num">4.68</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="10"><span class="stars">★★★★★★★★★★</span><span class="vogel-text">Alle Wildvögel (ganzjährig, kein Schalenabfall)</span></td><td></td></tr>
+    <tr><td class="name">Versele Laga Frost Nights Blend</td><td class="num">2580</td><td class="num">23.90</td><td class="num">9.26</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="7"><span class="stars">★★★★★★★☆☆☆</span><span class="vogel-text">Wintervögel, Meisen, Amseln (bei Frost)</span></td><td></td></tr>
+    <tr><td class="name">Versele Laga Gourmet Blend</td><td class="num">3000</td><td class="num">18.90</td><td class="num">6.30</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="7"><span class="stars">★★★★★★★☆☆☆</span><span class="vogel-text">Wintervögel, Meisen, Rotkehlchen</span></td><td></td></tr>
+    <tr><td class="name">Versele Laga Insect mix</td><td class="num">250</td><td class="num">15.90</td><td class="num">63.60</td><td class="mindest"></td><td>Insektenmix</td><td class="vogel" data-order="8"><span class="stars">★★★★★★★★☆☆</span><span class="vogel-text">Brütende Vögel, Rotkehlchen, Amseln, Jungvögel</span></td><td></td></tr>
+    <tr><td class="name">Versele Laga Menu Nature Jahreszeiten</td><td class="num">1000</td><td class="num">7.20</td><td class="num">7.20</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="10"><span class="stars">★★★★★★★★★★</span><span class="vogel-text">Alle Gartenvögel (ganzjährig)</span></td><td></td></tr>
+    <tr><td class="name">Versele Laga Nesting Blend</td><td class="num">2500</td><td class="num">28.90</td><td class="num">11.56</td><td class="mindest"></td><td>Nistfutter</td><td class="vogel" data-order="8"><span class="stars">★★★★★★★★☆☆</span><span class="vogel-text">Brütende Vögel, Jungvögel (Frühling/Sommer)</span></td><td></td></tr>
+    <tr><td class="name">Versele Laga Sunflower hearts</td><td class="num">750</td><td class="num">12.20</td><td class="num">16.27</td><td class="mindest"></td><td>Sonnenblumenkerne</td><td class="vogel" data-order="3"><span class="stars">★★★☆☆☆☆☆☆☆</span><span class="vogel-text">Meisen, Finken, Gimpel</span></td><td></td></tr>
+    <tr><td class="name">Versele Laga MN 4 Seasons Blend Promo</td><td class="num">4400</td><td class="num">13.90</td><td class="num">3.16</td><td class="mindest"></td><td>Streufutter</td><td class="vogel" data-order="10"><span class="stars">★★★★★★★★★★</span><span class="vogel-text">Alle Gartenvögel (ganzjährig)</span></td><td></td></tr>
+    <tr><td class="name">Vitakraft VitaGarden Erdnüsse geschält</td><td class="num">500</td><td class="num">5.50</td><td class="num">11.00</td><td class="mindest"></td><td>Erdnüsse</td><td class="vogel" data-order="3"><span class="stars">★★★☆☆☆☆☆☆☆</span><span class="vogel-text">Meisen, Kleiber, Spechte</span></td><td></td></tr>
   </tbody>
 </table>
 
@@ -410,15 +268,11 @@
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 <script>
   var funnelSVG = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 4a1 1 0 0 1 1-1h16a1 1 0 0 1 .76 1.65L14 12.59V20a1 1 0 0 1-1.45.89l-4-2A1 1 0 0 1 8 18v-5.41L3.24 5.65A1 1 0 0 1 3 5V4z"/></svg>';
-
   var filters = {};
   var $overlay = $('#overlay');
 
   function isMobile() { return window.innerWidth < 700; }
-  function closeAll() {
-    $('.filter-popup.open').removeClass('open');
-    $overlay.removeClass('active');
-  }
+  function closeAll() { $('.filter-popup.open').removeClass('open'); $overlay.removeClass('active'); }
 
   $.fn.dataTable.ext.search.push(function (settings, data) {
     for (var col in filters) {
@@ -441,7 +295,11 @@
         infoEmpty: 'Keine Produkte',
         zeroRecords: 'Keine Treffer'
       },
-      columnDefs: [{ targets: [1, 2, 3], type: 'num' }]
+      columnDefs: [
+        { targets: [1, 2, 3], type: 'num' },
+        { targets: [6], type: 'num' }
+      ],
+      order: [] // no default sort
     });
 
     $('.filter-btn').each(function () {
@@ -449,60 +307,28 @@
       var col   = parseInt(btn.data('col'));
       var type  = btn.data('type');
       var label = btn.data('label');
-
       btn.html(funnelSVG);
 
       var popup;
       if (type === 'range') {
-        popup = $(
-          '<div class="filter-popup">' +
-            '<div class="popup-handle"></div>' +
-            '<div class="popup-title">' + label + '</div>' +
-            '<label>Bereich</label>' +
-            '<div class="range-row">' +
-              '<input type="number" class="f-min" placeholder="Min" step="0.01" inputmode="decimal">' +
-              '<span>–</span>' +
-              '<input type="number" class="f-max" placeholder="Max" step="0.01" inputmode="decimal">' +
-            '</div>' +
-            '<div class="popup-footer">' +
-              '<button class="btn-reset">Zurücksetzen</button>' +
-              '<button class="btn-close">Fertig</button>' +
-            '</div>' +
-          '</div>'
-        );
+        popup = $('<div class="filter-popup"><div class="popup-handle"></div><div class="popup-title">' + label + '</div><label>Bereich</label><div class="range-row"><input type="number" class="f-min" placeholder="Min" step="0.01" inputmode="decimal"><span>–</span><input type="number" class="f-max" placeholder="Max" step="0.01" inputmode="decimal"></div><div class="popup-footer"><button class="btn-reset">Zurücksetzen</button><button class="btn-close">Fertig</button></div></div>');
         popup.find('.f-min, .f-max').on('input', function () {
           filters[col] = { type: 'range', min: popup.find('.f-min').val(), max: popup.find('.f-max').val() };
           btn.toggleClass('active', filters[col].min !== '' || filters[col].max !== '');
           table.draw();
         });
         popup.find('.btn-reset').on('click', function () {
-          popup.find('input').val('');
-          delete filters[col];
-          btn.removeClass('active');
-          table.draw();
+          popup.find('input').val(''); delete filters[col]; btn.removeClass('active'); table.draw();
         });
       } else {
-        popup = $(
-          '<div class="filter-popup">' +
-            '<div class="popup-handle"></div>' +
-            '<div class="popup-title">' + label + '</div>' +
-            '<label>Suche</label>' +
-            '<input type="text" class="f-text" placeholder="…" inputmode="search">' +
-            '<div class="popup-footer">' +
-              '<button class="btn-reset">Zurücksetzen</button>' +
-              '<button class="btn-close">Fertig</button>' +
-            '</div>' +
-          '</div>'
-        );
+        popup = $('<div class="filter-popup"><div class="popup-handle"></div><div class="popup-title">' + label + '</div><label>Suche</label><input type="text" class="f-text" placeholder="…" inputmode="search"><div class="popup-footer"><button class="btn-reset">Zurücksetzen</button><button class="btn-close">Fertig</button></div></div>');
         popup.find('.f-text').on('input', function () {
           var val = $(this).val();
           table.column(col).search(val).draw();
           btn.toggleClass('active', val !== '');
         });
         popup.find('.btn-reset').on('click', function () {
-          popup.find('input').val('');
-          table.column(col).search('').draw();
-          btn.removeClass('active');
+          popup.find('input').val(''); table.column(col).search('').draw(); btn.removeClass('active');
         });
       }
 
@@ -519,7 +345,6 @@
           popup.find('input').first().focus();
         }
       });
-
       popup.on('click', function (e) { e.stopPropagation(); });
     });
 
