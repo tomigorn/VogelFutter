@@ -6,136 +6,317 @@
   <title>Vogelfutter Vergleich</title>
   <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css">
   <style>
+    /* ── Base (mobile first) ─────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; }
+
     body {
-      font-family: system-ui, sans-serif;
-      padding: 2rem;
-      background: #f5f5f5;
-    }
-    h1 { margin-bottom: 0.25rem; }
-    p.quelle { color: #666; font-size: 0.9rem; margin-bottom: 1.5rem; }
-    #tabelle_wrapper {
-      background: white;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f0f2f5;
+      font-size: 15px;
     }
 
-    /* Column headers */
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 1rem;
+    }
+    header h1 { margin: 0 0 0.15rem; font-size: 1.2rem; }
+    header p  { margin: 0; font-size: 0.8rem; opacity: 0.7; }
+
+    #tabelle_wrapper {
+      background: white;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* ── DataTables controls ─────────────────────────────── */
+    div.dataTables_wrapper div.dataTables_filter,
+    div.dataTables_wrapper div.dataTables_info {
+      padding: 0.75rem 1rem;
+    }
+    div.dataTables_wrapper div.dataTables_filter {
+      text-align: left;
+    }
+    div.dataTables_wrapper div.dataTables_filter input {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 0.25rem;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    div.dataTables_wrapper div.dataTables_filter label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: #666;
+    }
+    div.dataTables_wrapper div.dataTables_info {
+      font-size: 0.8rem;
+      color: #888;
+      border-top: 1px solid #eee;
+    }
+
+    /* ── Table ───────────────────────────────────────────── */
+    table.dataTable {
+      font-size: 0.85rem;
+      margin: 0 !important;
+      width: 100% !important;
+    }
     table.dataTable thead th {
       background: #2c3e50;
       color: white;
       white-space: nowrap;
       position: relative;
-      padding-right: 28px !important;
+      padding: 0.6rem 0.5rem !important;
+      border-bottom: none !important;
     }
     table.dataTable thead th .th-inner {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
       justify-content: space-between;
     }
+    table.dataTable tbody td {
+      padding: 0.55rem 0.6rem !important;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    table.dataTable tbody tr:hover td { background: #f8f9fa; }
 
-    /* Filter button in header */
+    /* Sticky first column */
+    table.dataTable thead th:first-child,
+    table.dataTable tbody td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 2;
+    }
+    table.dataTable thead th:first-child {
+      z-index: 3;
+      background: #2c3e50;
+    }
+    table.dataTable tbody td:first-child {
+      background: white;
+      border-right: 2px solid #e0e0e0;
+    }
+    table.dataTable tbody tr:hover td:first-child { background: #f8f9fa; }
+    tr.ausgeschieden td:first-child { background: #fafafa !important; }
+
+    /* Data alignment */
+    td { white-space: nowrap; }
+    td.name { white-space: normal; min-width: 180px; max-width: 260px; }
+    td.num { text-align: right; }
+    td.mindest { text-align: center; }
+
+    /* Strikethrough row */
+    tr.ausgeschieden td { text-decoration: line-through; color: #bbb; }
+    tr.ausgeschieden td.grund { text-decoration: none; color: #e74c3c; font-style: italic; }
+
+    /* ── Filter button ───────────────────────────────────── */
     .filter-btn {
       background: none;
       border: none;
       cursor: pointer;
-      padding: 2px 4px;
-      border-radius: 3px;
+      /* 44×44 touch target */
+      min-width: 44px;
+      min-height: 44px;
+      margin: -10px -6px -10px 0;
       display: flex;
       align-items: center;
+      justify-content: center;
       flex-shrink: 0;
-      opacity: 0.6;
+      border-radius: 6px;
+      opacity: 0.55;
       transition: opacity 0.15s, background 0.15s;
+      -webkit-tap-highlight-color: transparent;
     }
-    .filter-btn:hover { opacity: 1; background: rgba(255,255,255,0.15); }
+    .filter-btn:hover, .filter-btn:focus { opacity: 1; background: rgba(255,255,255,0.15); outline: none; }
     .filter-btn.active { opacity: 1; }
     .filter-btn.active svg path { fill: #f39c12; }
-    .filter-btn svg { width: 13px; height: 13px; }
+    .filter-btn svg { width: 14px; height: 14px; pointer-events: none; }
     .filter-btn svg path { fill: white; }
 
-    /* Dropdown popup */
+    /* ── Filter popup — mobile: bottom sheet ─────────────── */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 999;
+    }
+    .overlay.active { display: block; }
+
     .filter-popup {
       display: none;
-      position: absolute;
-      top: calc(100% + 4px);
+      position: fixed;
+      bottom: 0;
       left: 0;
+      right: 0;
       z-index: 1000;
       background: white;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-      padding: 12px;
-      min-width: 180px;
+      border-radius: 16px 16px 0 0;
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
+      padding: 1.25rem 1.25rem calc(1.25rem + env(safe-area-inset-bottom));
       color: #333;
     }
-    .filter-popup.open { display: block; }
+    .filter-popup.open { display: block; animation: slideUp 0.22s ease; }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to   { transform: translateY(0);   opacity: 1; }
+    }
+
+    .popup-handle {
+      width: 36px;
+      height: 4px;
+      background: #ddd;
+      border-radius: 2px;
+      margin: 0 auto 1rem;
+    }
+    .popup-title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      color: #2c3e50;
+    }
     .filter-popup label {
       display: block;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-weight: 600;
-      color: #666;
-      margin-bottom: 4px;
+      color: #888;
+      margin-bottom: 0.35rem;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
     }
     .filter-popup input {
       width: 100%;
-      box-sizing: border-box;
-      padding: 5px 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 0.9rem;
+      padding: 0.6rem 0.75rem;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
       outline: none;
       transition: border-color 0.15s;
+      -webkit-appearance: none;
     }
     .filter-popup input:focus { border-color: #2c3e50; }
     .filter-popup .range-row {
       display: flex;
-      gap: 6px;
+      gap: 0.5rem;
       align-items: center;
     }
-    .filter-popup .range-row input { width: 80px; }
-    .filter-popup .range-row span { color: #999; font-size: 0.85rem; }
+    .filter-popup .range-row input { width: 0; flex: 1; }
+    .filter-popup .range-row span { color: #aaa; font-size: 1.1rem; flex-shrink: 0; }
     .filter-popup .popup-footer {
-      margin-top: 8px;
-      text-align: right;
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
     }
     .filter-popup .btn-reset {
-      background: none;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      padding: 3px 10px;
-      font-size: 0.8rem;
+      flex: 1;
+      background: #f0f2f5;
+      border: none;
+      border-radius: 8px;
+      padding: 0.65rem;
+      font-size: 0.95rem;
       cursor: pointer;
-      color: #666;
+      color: #555;
+      font-weight: 500;
     }
-    .filter-popup .btn-reset:hover { background: #f5f5f5; }
+    .filter-popup .btn-close {
+      flex: 1;
+      background: #2c3e50;
+      border: none;
+      border-radius: 8px;
+      padding: 0.65rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+      color: white;
+      font-weight: 600;
+    }
 
-    /* Table data */
-    tr.ausgeschieden td { text-decoration: line-through; color: #aaa; }
-    tr.ausgeschieden td.grund { text-decoration: none; color: #e74c3c; font-style: italic; }
-    td { white-space: nowrap; }
-    td.name { white-space: normal; min-width: 220px; }
-    td.num { text-align: right; }
-    td.mindest { text-align: center; }
+    /* ── Desktop (≥ 700px): dropdown instead of bottom sheet ── */
+    @media (min-width: 700px) {
+      body { padding: 0; background: #f0f2f5; }
+
+      header { padding: 1.5rem 2rem; }
+      header h1 { font-size: 1.5rem; }
+
+      #tabelle_wrapper {
+        margin: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        overflow: visible; /* allow popup to overflow */
+      }
+      /* Re-enable overflow-x on the inner scroll div DataTables creates */
+      #tabelle_wrapper > .dataTables_scroll,
+      #tabelle_wrapper { overflow-x: auto; }
+
+      div.dataTables_wrapper div.dataTables_filter {
+        text-align: right;
+      }
+      div.dataTables_wrapper div.dataTables_filter label { display: inline; }
+      div.dataTables_wrapper div.dataTables_filter input {
+        width: auto;
+        display: inline-block;
+        margin-left: 0.5rem;
+        margin-top: 0;
+      }
+
+      table.dataTable { font-size: 0.9rem; }
+      table.dataTable tbody td { padding: 0.5rem 0.75rem !important; }
+      table.dataTable thead th { padding: 0.65rem 0.75rem !important; }
+
+      /* Popup: desktop dropdown */
+      .filter-popup {
+        position: absolute;
+        bottom: auto;
+        left: 0;
+        right: auto;
+        top: calc(100% + 4px);
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        padding: 0.9rem;
+        min-width: 200px;
+        animation: none;
+      }
+      .filter-popup.open { animation: fadeIn 0.12s ease; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+      /* right-align popup for last 2 columns */
+      th:nth-last-child(-n+2) .filter-popup { left: auto; right: 0; }
+
+      .popup-handle { display: none; }
+      .popup-title { font-size: 0.85rem; margin-bottom: 0.5rem; }
+      .filter-popup input { padding: 0.4rem 0.6rem; font-size: 0.9rem; }
+      .filter-popup .btn-close { display: none; }
+      .filter-popup .btn-reset { flex: none; padding: 0.35rem 0.9rem; font-size: 0.82rem; border-radius: 5px; }
+      .filter-popup .popup-footer { justify-content: flex-end; margin-top: 0.6rem; }
+
+      .overlay { display: none !important; }
+    }
   </style>
 </head>
 <body>
 
-<h1>Vogelfutter Vergleich</h1>
-<p class="quelle">Quellen: Galaxus.ch — gespeicherte Produktseiten</p>
+<header>
+  <h1>Vogelfutter Vergleich</h1>
+  <p>Quellen: Galaxus.ch</p>
+</header>
+
+<div id="overlay" class="overlay"></div>
 
 <table id="tabelle" class="display" style="width:100%">
   <thead>
     <tr>
-      <th><div class="th-inner"><span>Produktname inkl. Marke</span><button class="filter-btn" data-col="0" data-type="text">ICON</button></div></th>
-      <th><div class="th-inner"><span>Menge (g)</span><button class="filter-btn" data-col="1" data-type="range">ICON</button></div></th>
-      <th><div class="th-inner"><span>Preis (CHF)</span><button class="filter-btn" data-col="2" data-type="range">ICON</button></div></th>
-      <th><div class="th-inner"><span>CHF/kg</span><button class="filter-btn" data-col="3" data-type="range">ICON</button></div></th>
-      <th><div class="th-inner"><span>Mindestmenge</span><button class="filter-btn" data-col="4" data-type="text">ICON</button></div></th>
-      <th><div class="th-inner"><span>Art</span><button class="filter-btn" data-col="5" data-type="text">ICON</button></div></th>
-      <th><div class="th-inner"><span>Ausscheidungsgrund</span><button class="filter-btn" data-col="6" data-type="text">ICON</button></div></th>
+      <th><div class="th-inner"><span>Produktname inkl. Marke</span><button class="filter-btn" data-col="0" data-type="text" data-label="Produktname">ICON</button></div></th>
+      <th><div class="th-inner"><span>Menge (g)</span><button class="filter-btn" data-col="1" data-type="range" data-label="Menge (g)">ICON</button></div></th>
+      <th><div class="th-inner"><span>Preis (CHF)</span><button class="filter-btn" data-col="2" data-type="range" data-label="Preis (CHF)">ICON</button></div></th>
+      <th><div class="th-inner"><span>CHF/kg</span><button class="filter-btn" data-col="3" data-type="range" data-label="CHF/kg">ICON</button></div></th>
+      <th><div class="th-inner"><span>Mindestmenge</span><button class="filter-btn" data-col="4" data-type="text" data-label="Mindestmenge">ICON</button></div></th>
+      <th><div class="th-inner"><span>Art</span><button class="filter-btn" data-col="5" data-type="text" data-label="Art">ICON</button></div></th>
+      <th><div class="th-inner"><span>Ausscheidungsgrund</span><button class="filter-btn" data-col="6" data-type="text" data-label="Ausscheidungsgrund">ICON</button></div></th>
     </tr>
   </thead>
   <tbody>
@@ -191,14 +372,18 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
 <script>
-  // SVG funnel icon
   var funnelSVG = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 4a1 1 0 0 1 1-1h16a1 1 0 0 1 .76 1.65L14 12.59V20a1 1 0 0 1-1.45.89l-4-2A1 1 0 0 1 8 18v-5.41L3.24 5.65A1 1 0 0 1 3 5V4z"/></svg>';
 
-  // State: active filters per column
-  var filters = {};      // col -> { min, max } or { text }
-  var openPopup = null;  // currently open button element
+  var filters = {};
+  var $overlay = $('#overlay');
 
-  // Range filter plugin
+  function isMobile() { return window.innerWidth < 700; }
+
+  function closeAll() {
+    $('.filter-popup.open').removeClass('open');
+    $overlay.removeClass('active');
+  }
+
   $.fn.dataTable.ext.search.push(function (settings, data) {
     for (var col in filters) {
       var f = filters[col];
@@ -223,31 +408,36 @@
       columnDefs: [{ targets: [1, 2, 3], type: 'num' }]
     });
 
-    // Replace ICON placeholder with SVG and attach popups
     $('.filter-btn').each(function () {
       var btn   = $(this);
       var col   = parseInt(btn.data('col'));
       var type  = btn.data('type');
+      var label = btn.data('label');
 
       btn.html(funnelSVG);
 
-      // Build popup
       var popup;
       if (type === 'range') {
-        popup = $('<div class="filter-popup">' +
-          '<label>Von</label>' +
-          '<div class="range-row">' +
-            '<input type="number" class="f-min" placeholder="Min" step="0.01">' +
-            '<span>–</span>' +
-            '<input type="number" class="f-max" placeholder="Max" step="0.01">' +
-          '</div>' +
-          '<div class="popup-footer"><button class="btn-reset">Zurücksetzen</button></div>' +
-        '</div>');
+        popup = $(
+          '<div class="filter-popup">' +
+            '<div class="popup-handle"></div>' +
+            '<div class="popup-title">' + label + '</div>' +
+            '<label>Bereich</label>' +
+            '<div class="range-row">' +
+              '<input type="number" class="f-min" placeholder="Min" step="0.01" inputmode="decimal">' +
+              '<span>–</span>' +
+              '<input type="number" class="f-max" placeholder="Max" step="0.01" inputmode="decimal">' +
+            '</div>' +
+            '<div class="popup-footer">' +
+              '<button class="btn-reset">Zurücksetzen</button>' +
+              '<button class="btn-close">Fertig</button>' +
+            '</div>' +
+          '</div>'
+        );
 
         popup.find('.f-min, .f-max').on('input', function () {
           filters[col] = { type: 'range', min: popup.find('.f-min').val(), max: popup.find('.f-max').val() };
-          var active = filters[col].min !== '' || filters[col].max !== '';
-          btn.toggleClass('active', active);
+          btn.toggleClass('active', filters[col].min !== '' || filters[col].max !== '');
           table.draw();
         });
 
@@ -259,11 +449,18 @@
         });
 
       } else {
-        popup = $('<div class="filter-popup">' +
-          '<label>Suche</label>' +
-          '<input type="text" class="f-text" placeholder="…">' +
-          '<div class="popup-footer"><button class="btn-reset">Zurücksetzen</button></div>' +
-        '</div>');
+        popup = $(
+          '<div class="filter-popup">' +
+            '<div class="popup-handle"></div>' +
+            '<div class="popup-title">' + label + '</div>' +
+            '<label>Suche</label>' +
+            '<input type="text" class="f-text" placeholder="…" inputmode="search">' +
+            '<div class="popup-footer">' +
+              '<button class="btn-reset">Zurücksetzen</button>' +
+              '<button class="btn-close">Fertig</button>' +
+            '</div>' +
+          '</div>'
+        );
 
         popup.find('.f-text').on('input', function () {
           var val = $(this).val();
@@ -278,33 +475,27 @@
         });
       }
 
-      // Attach popup to the th (for positioning)
+      popup.find('.btn-close').on('click', closeAll);
+
+      // Attach to th for desktop dropdown positioning
       btn.closest('th').css('position', 'relative').append(popup);
 
-      // Toggle popup on button click
       btn.on('click', function (e) {
         e.stopPropagation();
         var isOpen = popup.hasClass('open');
-        // close any open popup
-        $('.filter-popup.open').removeClass('open');
-        openPopup = null;
+        closeAll();
         if (!isOpen) {
           popup.addClass('open');
-          openPopup = popup[0];
-          // focus first input
+          if (isMobile()) $overlay.addClass('active');
           popup.find('input').first().focus();
         }
       });
 
-      // Prevent closing when clicking inside popup
       popup.on('click', function (e) { e.stopPropagation(); });
     });
 
-    // Close popup when clicking outside
-    $(document).on('click', function () {
-      $('.filter-popup.open').removeClass('open');
-      openPopup = null;
-    });
+    $overlay.on('click', closeAll);
+    $(document).on('click', function () { if (!isMobile()) closeAll(); });
   });
 </script>
 </body>
