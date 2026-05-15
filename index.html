@@ -185,6 +185,67 @@
       font-size: 0.95rem; cursor: pointer; color: white; font-weight: 600;
     }
 
+    /* ── Waldrand-Info-Sektion ───────────────────────────── */
+    .waldrand-section {
+      padding: 1rem;
+      background: white;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .waldrand-section h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2c3e50;
+      margin: 0 0 0.25rem;
+    }
+    .waldrand-section .subtitle {
+      font-size: 0.78rem;
+      color: #888;
+      margin: 0 0 0.9rem;
+    }
+    .vogel-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+    .vogel-gruppe {
+      background: #f7f9fc;
+      border-radius: 8px;
+      padding: 0.6rem 0.75rem;
+      border-left: 3px solid #2c3e50;
+    }
+    .vogel-gruppe h3 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #2c3e50;
+      margin: 0 0 0.35rem;
+    }
+    .vogel-gruppe ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .vogel-gruppe ul li {
+      font-size: 0.8rem;
+      color: #444;
+      padding: 0.1rem 0;
+      display: flex;
+      align-items: baseline;
+      gap: 0.35rem;
+    }
+    .vogel-gruppe ul li::before {
+      content: "·";
+      color: #aaa;
+      flex-shrink: 0;
+    }
+
+    @media (min-width: 700px) {
+      .waldrand-section { padding: 1.25rem 2rem 1.5rem; }
+      .waldrand-section h2 { font-size: 1.1rem; }
+      .vogel-grid { grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+    }
+
     @media (min-width: 700px) {
       header { padding: 1.5rem 2rem; }
       header h1 { font-size: 1.5rem; }
@@ -228,6 +289,57 @@
   <h1>Vogelfutter Vergleich</h1>
   <p>Quellen: Galaxus.ch</p>
 </header>
+
+<section class="waldrand-section">
+  <h2>🌳 Wildvögel am Waldrand Zürich</h2>
+  <p class="subtitle">Häufige Arten in urbanen Waldrandgebieten der Stadt Zürich — Grundlage für die Futterwahl</p>
+  <div class="vogel-grid">
+    <div class="vogel-gruppe">
+      <h3>Meisen &amp; Kleiber</h3>
+      <ul>
+        <li>Kohlmeise</li>
+        <li>Blaumeise</li>
+        <li>Tannenmeise</li>
+        <li>Sumpfmeise</li>
+        <li>Kleiber</li>
+        <li>Gartenbaumläufer</li>
+      </ul>
+    </div>
+    <div class="vogel-gruppe">
+      <h3>Finken &amp; Körner­fresser</h3>
+      <ul>
+        <li>Buchfink</li>
+        <li>Grünfink</li>
+        <li>Stieglitz (Distelfink)</li>
+        <li>Haussperling</li>
+        <li>Gimpel</li>
+        <li>Erlenzeisig</li>
+      </ul>
+    </div>
+    <div class="vogel-gruppe">
+      <h3>Weich­futter­fresser</h3>
+      <ul>
+        <li>Amsel</li>
+        <li>Rotkehlchen</li>
+        <li>Singdrossel</li>
+        <li>Hausrotschwanz</li>
+        <li>Zaunkönig</li>
+        <li>Mönchsgrasmücke</li>
+      </ul>
+    </div>
+    <div class="vogel-gruppe">
+      <h3>Spechte &amp; Weitere</h3>
+      <ul>
+        <li>Buntspecht</li>
+        <li>Grünspecht</li>
+        <li>Eichelhäher</li>
+        <li>Elster</li>
+        <li>Star</li>
+        <li>Dohle</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
 <div id="overlay" class="overlay"></div>
 
