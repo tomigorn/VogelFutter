@@ -140,6 +140,25 @@
     .vogel-gruppe ul li { font-size: 0.8rem; color: #444; padding: 0.1rem 0; display: flex; align-items: baseline; gap: 0.35rem; }
     .vogel-gruppe ul li::before { content: "·"; color: #aaa; flex-shrink: 0; }
 
+    /* Eric Schweizer Sortiment */
+    .sortiment-section { padding: 1rem; background: #fffdf7; border-bottom: 1px solid #e8e8e8; }
+    .sortiment-section h2 { font-size: 1rem; font-weight: 700; color: #2c3e50; margin: 0 0 0.25rem; }
+    .sortiment-section .subtitle { font-size: 0.78rem; color: #888; margin: 0 0 0.9rem; }
+    .sortiment-section .empfehlung { background: #eef7ee; border-left: 3px solid #4a9d4a; border-radius: 6px; padding: 0.65rem 0.85rem; font-size: 0.82rem; line-height: 1.45; color: #2c5530; margin: 0 0 1rem; }
+    .sortiment-section .empfehlung strong { color: #1f4020; }
+    .sortiment-gruppe-titel { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #2c3e50; margin: 1.1rem 0 0.4rem; }
+    .sortiment-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 8px; }
+    .sortiment-table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 0.8rem; background: white; }
+    .sortiment-table th { background: #46596b; color: white; text-align: left; padding: 0.5rem 0.6rem; font-size: 0.7rem; font-weight: 600; white-space: nowrap; }
+    .sortiment-table td { padding: 0.5rem 0.6rem; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+    .sortiment-table tr:last-child td { border-bottom: none; }
+    .sortiment-table .pname { font-weight: 600; color: #2c3e50; }
+    .sortiment-table .pcode { font-size: 0.68rem; color: #999; font-weight: 400; }
+    .sortiment-table .stars { font-size: 0.85rem; }
+    .sortiment-table .saison { white-space: nowrap; }
+    .sortiment-table td.bem { color: #666; font-size: 0.74rem; white-space: normal; min-width: 200px; }
+    .sortiment-table tr.zubehoer td { background: #fafafa; color: #999; font-style: italic; }
+
     /* Desktop */
     @media (min-width: 700px) {
       header { padding: 1.5rem 2rem; }
@@ -219,6 +238,221 @@
         <li>Elster</li><li>Star</li><li>Dohle</li>
       </ul>
     </div>
+  </div>
+</section>
+
+<section class="sortiment-section">
+  <h2>🦅 Eric Schweizer — Aktuelles Sortiment (Katalog)</h2>
+  <p class="subtitle">Alle Wildvogel-Produkte aus dem Schweizer/WildCare-Katalog (Screenshots S.&nbsp;44–52). Bewertung anhand der Katalog-Rezeptur — bezogen auf die 24 Waldrand-Arten in Oerlikon (10★ = alle Arten/Futtertypen abgedeckt) und auf die Jahreszeiten (4★ = ganzjährig). Werte können von den einzelnen Galaxus-Artikeln in der Tabelle unten leicht abweichen.</p>
+
+  <div class="empfehlung">
+    <strong>Empfehlung für deinen Waldrand-Garten:</strong> Für die bunte Mischung in Oerlikon (Meisen &amp; Kleiber, Finken &amp; Körnerfresser, Weichfresser wie Amsel/Rotkehlchen/Drossel sowie Spechte &amp; Stare) ist <strong>QUALITY</strong> bzw. <strong>EXPERT</strong> die beste ganzjährige Wahl: Sonnenblumenkerne + Haferflocken bedienen Körner- und Meisenfresser, die zusätzlichen <em>Mehlwürmer &amp; Beeren</em> auch Amsel, Rotkehlchen, Singdrossel und Star. Ergänze im Winter mit <strong>Insektenfettknödel</strong> und im Frühling (Brutzeit) mit <strong>Mehlwürmern</strong>. Wer Schalenabfall vermeiden will: <strong>TERRACE</strong> oder enthülste Sonnenblumenkerne.
+  </div>
+
+  <div class="sortiment-scroll">
+  <table class="sortiment-table">
+    <thead>
+      <tr>
+        <th>Produkt</th>
+        <th>Grössen</th>
+        <th>Geeignet für (Oerlikon) · ★/10</th>
+        <th>Jahreszeit · ★/4</th>
+        <th>Bemerkung</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="5" class="sortiment-gruppe-titel" style="padding-top:0.5rem;">Wildvogelmischungen (hausgemacht)</td></tr>
+      <tr>
+        <td><span class="pname">PREMIUM</span><br><span class="pcode">Art. FA · 49008/49090/49119</span></td>
+        <td>1 / 5 / 15 kg</td>
+        <td><span class="stars">★★★★★★★★☆☆</span><span class="vogel-text">Finken, Meisen, Sperlinge, Kleiber, Amsel, Spechte, Eichelhäher, Star</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig</span></td>
+        <td class="bem">Sonnenblumenkerne + Hanf — bewährter Körnerfresser-Allrounder mit Proteinen &amp; Aminosäuren.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">CLASSIC</span><br><span class="pcode">Art. FB · 49009/40244/49091</span></td>
+        <td>1 / 2.5 / 5 / 25 kg</td>
+        <td><span class="stars">★★★★★★★☆☆☆</span><span class="vogel-text">Finken, Meisen, Ammern, Sperlinge, Weichfresser</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig</span></td>
+        <td class="bem">Hausgemachte Standardmischung aus sorgfältig gereinigten Rohstoffen.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">TERRACE</span><br><span class="pcode">Art. TERMIX · 49010/49092</span></td>
+        <td>1 / 5 kg</td>
+        <td><span class="stars">★★★★★☆☆☆☆☆</span><span class="vogel-text">Finken, Meisen, Ammern, Spatzen</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig</span></td>
+        <td class="bem">Schalenfrei → kein Schalenabfall, ideal für Balkon/Terrasse.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">QUALITY</span><br><span class="pcode">Art. QUAMIX · 49011/49093</span></td>
+        <td>1.2 / 5 kg</td>
+        <td><span class="stars">★★★★★★★★★☆</span><span class="vogel-text">Körner-, Weich- &amp; Insektenfresser: Meisen, Finken, Amsel, Rotkehlchen, Drossel, Star, Spechte</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig</span></td>
+        <td class="bem">Sonnenblumen, Haferflocken, <em>Beeren &amp; Mehlwürmer</em> — deckt fast alle Arten ab. Top-Allrounder.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">EXPERT</span><br><span class="pcode">Art. EXPMIX · 49012/49094</span></td>
+        <td>1 / 5 kg</td>
+        <td><span class="stars">★★★★★★★★★☆</span><span class="vogel-text">Körner-, Weich- &amp; Insektenfresser: Meisen, Finken, Amsel, Rotkehlchen, Drossel, Star, Spechte</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig</span></td>
+        <td class="bem">Wie QUALITY: hochwertige Vielfalt mit Mehlwürmern &amp; Beeren — breiteste Abdeckung.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">ENERGY</span><br><span class="pcode">Art. ENEMIX · 49013/49095/49120</span></td>
+        <td>1 / 5 / 25 kg</td>
+        <td><span class="stars">★★★★★★★☆☆☆</span><span class="vogel-text">Körnerfresser &amp; Weichfresser (energiehungrig im Winter)</span></td>
+        <td class="saison"><span class="stars">★★☆☆</span><span class="vogel-text">Herbst / Winter</span></td>
+        <td class="bem">Rinderfett, Erdnüsse, Rosinen, Negersaat — maximale Energie für kalte Tage.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">DELICATESS</span><br><span class="pcode">Art. DELMIX · 49014/49096</span></td>
+        <td>600 g / 5 kg</td>
+        <td><span class="stars">★★★★★★★★☆☆</span><span class="vogel-text">Sehr breit: Finken, Meisen, Sperlinge + Weichfresser (Beeren, Garnelen, Fett)</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig</span></td>
+        <td class="bem">Premium-Vielfalt: Hanf, Dörrfrüchte, Ebereschen-/Wacholderbeeren, Garnelen, Honig, Rinderfett.</td>
+      </tr>
+
+      <tr><td colspan="5" class="sortiment-gruppe-titel">WILDLIFE — Einzelfutter &amp; Knödel</td></tr>
+      <tr>
+        <td><span class="pname">Mehlwürmer</span><br><span class="pcode">Art. MEHLW · 49029/49097</span></td>
+        <td>250 g / 1.8 kg</td>
+        <td><span class="stars">★★★★★★☆☆☆☆</span><span class="vogel-text">Amsel, Rotkehlchen, Kohl-/Blaumeise, Sperlinge, Star, Zaunkönig</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig (Schwerpunkt Brutzeit)</span></td>
+        <td class="bem">Proteinreiche Delikatesse für Weichfresser. Nur ergänzend füttern (Ca:P-Verhältnis).</td>
+      </tr>
+      <tr>
+        <td><span class="pname">Gehackte Erdnüsse</span><br><span class="pcode">Art. ERDGEB · 47967/47968</span></td>
+        <td>1 / 5 kg</td>
+        <td><span class="stars">★★★★★☆☆☆☆☆</span><span class="vogel-text">Meisen, Kleiber, Spechte, Eichelhäher, Finken</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig</span></td>
+        <td class="bem">Hoher Fett- &amp; Ölanteil, energiereich.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">Sonnenblumenkerne gestreift</span><br><span class="pcode">Art. SOGO · 41423/41425/48890</span></td>
+        <td>1 / 5 / 15 kg</td>
+        <td><span class="stars">★★★★☆☆☆☆☆☆</span><span class="vogel-text">Finken, Sperlinge, Ammern, Meisen (kräftiger Schnabel)</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig</span></td>
+        <td class="bem">Klassischer Körnerfresser-Standard; Schale für Kleinvögel etwas schwer.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">Sonnenblumenkerne enthülst</span><br><span class="pcode">Art. SOENT · 24267/41414/41413</span></td>
+        <td>700 g / 5 / 25 kg</td>
+        <td><span class="stars">★★★★★★☆☆☆☆</span><span class="vogel-text">Finken, Meisen, Sperlinge, Ammern — auch Kleinvögel</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig</span></td>
+        <td class="bem">Geschält → leicht zu öffnen, null Abfall, beste Verdaulichkeit.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">Sonnenblumenkerne weiss</span><br><span class="pcode">Art. SOWA · 44275</span></td>
+        <td>300 g</td>
+        <td><span class="stars">★★★☆☆☆☆☆☆☆</span><span class="vogel-text">Finken, Meisen, Sperlinge</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig</span></td>
+        <td class="bem">Weisse Kerne, kräftiger Schnabel nötig.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">Hanfsamen</span><br><span class="pcode">Art. HANF · 44265/40366/40365</span></td>
+        <td>700 g / 5 / 25 kg</td>
+        <td><span class="stars">★★★☆☆☆☆☆☆☆</span><span class="vogel-text">Körnerfresser (Finken, Meisen)</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig</span></td>
+        <td class="bem">Wichtige Einzelkomponente, fehlt in keiner guten Mischung.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">Insektenfettknödel</span><br><span class="pcode">Art. MEINS · 48725/48735</span></td>
+        <td>6×90 g (Display 27×540 g)</td>
+        <td><span class="stars">★★★★★★★☆☆☆</span><span class="vogel-text">Weich- &amp; Körnerfresser: Meisen, Spechte, Kleiber, Amsel, Rotkehlchen, Star</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig</span></td>
+        <td class="bem">100 % Insektenfett — hochwertige Energie- &amp; Proteinquelle für viele Arten.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">Premium Meisenknödel</span><br><span class="pcode">Art. PMEIK · 48724/48732</span></td>
+        <td>6×90 g (Display 27×540 g)</td>
+        <td><span class="stars">★★★★★★☆☆☆☆</span><span class="vogel-text">Weich- &amp; Körnerfresser: Meisen, Kleiber, Spechte, Rotkehlchen</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig</span></td>
+        <td class="bem">Höherer Anteil Hafer- &amp; Weizenflocken plus erlesene Nüsse.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">Meisenknödel gross</span><br><span class="pcode">Art. MEIFIT · 40869</span></td>
+        <td>180 g</td>
+        <td><span class="stars">★★★★★☆☆☆☆☆</span><span class="vogel-text">Weich-, Insekten- &amp; Körnerfresser: Meisen, Rotkehlchen</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig</span></td>
+        <td class="bem">Grosser Knödel — Energie für viele gefiederte Gäste.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">Meisenknödel ohne Netz</span><br><span class="pcode">Art. MEION · 48723</span></td>
+        <td>6×90 g</td>
+        <td><span class="stars">★★★★★☆☆☆☆☆</span><span class="vogel-text">Weich- &amp; Körnerfresser</span></td>
+        <td class="saison"><span class="stars">★★☆☆</span><span class="vogel-text">Herbst / Winter</span></td>
+        <td class="bem">Netzfrei (vogelsicher), aus Getreide, Kernen, Nüssen &amp; Ölen — Energie für die kalte Jahreszeit.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">Meisenknödel im Eimer</span><br><span class="pcode">Art. MKEI · 48727</span></td>
+        <td>30×90 g</td>
+        <td><span class="stars">★★★★★☆☆☆☆☆</span><span class="vogel-text">Weich- &amp; Körnerfresser</span></td>
+        <td class="saison"><span class="stars">★★☆☆</span><span class="vogel-text">Herbst / Winter</span></td>
+        <td class="bem">Energiereiche Knödel im Grossgebinde — Leckerbissen für viele Gäste.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">Futterstange XXL</span> <span style="color:#e6a817;font-size:0.68rem;font-weight:700;">NEU</span><br><span class="pcode">Art. FUSTA · 50065</span></td>
+        <td>600 g</td>
+        <td><span class="stars">★★★★★★☆☆☆☆</span><span class="vogel-text">Viele heimische Wildvögel: Meisen, Finken, Spechte, Kleiber</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig</span></td>
+        <td class="bem">Erdnüsse, Sonnenblumenkerne &amp; Getreideflocken im Netz, einfach aufzuhängen.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">Erdnuss-Spender</span><br><span class="pcode">Art. ERSPE · 45219</span></td>
+        <td>475 g</td>
+        <td><span class="stars">★★★★★☆☆☆☆☆</span><span class="vogel-text">Weich- &amp; Körnerfresser: Meisen, Kleiber, Spechte, Finken</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig</span></td>
+        <td class="bem">Futter + wettergeschütztes Futtergerät in einem; Nüsse liefern ganzjährig Energie.</td>
+      </tr>
+
+      <tr><td colspan="5" class="sortiment-gruppe-titel">Bundles &amp; gefülltes Zubehör</td></tr>
+      <tr>
+        <td><span class="pname">Futterhaus «Natur» + 1 kg PREMIUM</span><br><span class="pcode">Art. BVSN · 47553</span></td>
+        <td>1 Bundle</td>
+        <td><span class="stars">★★★★★★★★☆☆</span><span class="vogel-text">wie PREMIUM (Körner-/Meisenfresser, Amsel, Spechte, Star)</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig</span></td>
+        <td class="bem">FSC-Futterhaus inkl. Premium-Mischung — Einsteigerset.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">Futterhaus «Loft» + 1 kg PREMIUM</span><br><span class="pcode">Art. BLOFT · 45195/45196</span></td>
+        <td>1 Bundle (auch 5er)</td>
+        <td><span class="stars">★★★★★★★★☆☆</span><span class="vogel-text">wie PREMIUM</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig</span></td>
+        <td class="bem">FSC-Futterhaus inkl. Premium-Mischung.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">Futterhaus «Farm» + 1 kg PREMIUM</span><br><span class="pcode">Art. BFARM · 45193</span></td>
+        <td>1 Bundle</td>
+        <td><span class="stars">★★★★★★★★☆☆</span><span class="vogel-text">wie PREMIUM</span></td>
+        <td class="saison"><span class="stars">★★★★</span><span class="vogel-text">Ganzjährig</span></td>
+        <td class="bem">FSC-Futterhaus inkl. Premium-Mischung.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">Bambusrohr mit Fettfutter</span><br><span class="pcode">Art. BAMBO · 42781</span></td>
+        <td>1 Stk</td>
+        <td><span class="stars">★★★★★☆☆☆☆☆</span><span class="vogel-text">Weich- &amp; Körnerfresser: Meisen, Spechte, Kleiber</span></td>
+        <td class="saison"><span class="stars">★★☆☆</span><span class="vogel-text">Herbst / Winter</span></td>
+        <td class="bem">Bambusrohr gefüllt mit reichhaltiger Fett-Körner-Mischung.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">Coconut, 3 Loch</span><br><span class="pcode">Art. CNUT · 40001</span></td>
+        <td>1 Stk</td>
+        <td><span class="stars">★★★★★☆☆☆☆☆</span><span class="vogel-text">Weich- &amp; Körnerfresser: Meisen, Spechte, Kleiber</span></td>
+        <td class="saison"><span class="stars">★★☆☆</span><span class="vogel-text">Herbst / Winter</span></td>
+        <td class="bem">Kokosnuss mit 3 Öffnungen, gefüllt mit Fett-Körner-Mischung.</td>
+      </tr>
+      <tr>
+        <td><span class="pname">Kokosnuss mit Plattform</span><br><span class="pcode">Art. CNUTE · 49065</span></td>
+        <td>1 Stk</td>
+        <td><span class="stars">★★★★★☆☆☆☆☆</span><span class="vogel-text">Weich- &amp; Körnerfresser</span></td>
+        <td class="saison"><span class="stars">★★☆☆</span><span class="vogel-text">Herbst / Winter</span></td>
+        <td class="bem">Gefüllt mit Erdnussbutter &amp; Samen, mit Landeplattform.</td>
+      </tr>
+
+      <tr class="zubehoer"><td><span class="pname">WildCare Display</span><br><span class="pcode">Art. WCDIS · 49103</span></td><td>80 Stk</td><td>—</td><td>—</td><td class="bem">Verkaufs-Präsentoir mit allen 8 Mischungen (kein einzelnes Futter).</td></tr>
+      <tr class="zubehoer"><td><span class="pname">Futterschaufel mit Trichter</span><br><span class="pcode">Art. FSH · 47546</span></td><td>750 g Vol.</td><td>—</td><td>—</td><td class="bem">Zubehör zum Befüllen von Futterhäusern (kein Futter).</td></tr>
+    </tbody>
+  </table>
   </div>
 </section>
 
